@@ -1,0 +1,3 @@
+# Ignore python virtual environment directory
+virtualenv_py3/
+scons-test
