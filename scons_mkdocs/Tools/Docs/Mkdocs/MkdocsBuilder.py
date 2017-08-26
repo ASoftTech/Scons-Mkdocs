@@ -51,9 +51,11 @@ def MkdocsBuilder(env, source = None):
 def __MkdocsBuilder_modify_targets(target, source, env):
     del target[:]
     if env['Mkdocs_SiteDir']:
-        target.append(Dir(env['Mkdocs_SiteDir']))
+        dirnode = Dir(env['Mkdocs_SiteDir'])
     else:
-        target.append(Dir('site'))
+        dirnode = Dir('site')
+    target.append(dirnode)
+    env.Clean(target, dirnode)
     return target, source
 
 
