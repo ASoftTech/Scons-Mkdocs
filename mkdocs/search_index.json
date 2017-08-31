@@ -1,0 +1,39 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "QtSharp\n\n\nMono/.NET bindings for Qt\n\n\nThis project aims to create Mono/.NET libraries that wrap Qt (\nhttps://qt-project.org/\n) thus enabling its usage through C#. \n\nIt relies on the excellent CppSharp (\nhttps://github.com/mono/CppSharp\n). \n\nCppSharp is a generator that expects the include and library directories of a Qt set-up and then generates and compiles the wrappers. \n\nWhile still in development, it should work with any Qt version when complete.\n\n\nThere is no Qt included in the repository, users have to download and install Qt themselves. \n\nFor now, Qt MinGW for Windows has been the only tested version. \n\nQt for OS X and Linux are planned, Qt for VC++ has not been planned for now.\n\n\nThe source code is separated into a library that contains the settings and passes the generator needs, and a command-line client. \n\nIn the future, a GUI client, constructed with Qt# itself, is planned as well.\n\n\nGetting started\n\n\nYou need to deploy Qt itself by following \nhttp://doc.qt.io/qt-5/windows-deployment.html#application-dependencies\n. \n\nIn addition, for each Qt module you use you also need Qt\n-inlines.dll deployed alongside your executable. \n\nYou can use QtSharp with any C# IDE, including Visual Studio, but make sure your executable is 32-bit by either using the\nx86 configuration or AnyCPU with \nPrefer 32-bit\n checked.\n\n\nExamples\n\n\nYou can find examples at\n\n\n\n\nhttps://github.com/dsoronda/QtSharpDemos\n\n\nhttps://github.com/grbd/QtSharp.TestApps\n\n\n\n\nThanks to \nhttps://github.com/dsoronda\n and \nhttps://github.com/grbd\n\n\nDevelopment\n\n\nIf you plan on getting involved with the development of QtSharp \n\nthere\ns some notes associated with development included below.\n\n\n\n\nDevelopment Notes\n\n\n\n\nCoverage\n\n\nQtSharp has been tested only with Qt for MinGW, and with Qt\ns built-in MinGW set-up, so far.\n\n\nFunding\n\n\nIn order to speed up the development of the project, I\nve been looking for funding.\nThere are two ways for that.\n\n\n\n\nThe first one is sponsoring Qt# itself.\n\n\nThe second way would be paid assignments related to CppSharp \n\n    For example bindings for other C++ libraries.\n\n\n\n\nEither way is going to immensely benefit Qt#.", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#qtsharp", 
+            "text": "Mono/.NET bindings for Qt  This project aims to create Mono/.NET libraries that wrap Qt ( https://qt-project.org/ ) thus enabling its usage through C#.  \nIt relies on the excellent CppSharp ( https://github.com/mono/CppSharp ).  \nCppSharp is a generator that expects the include and library directories of a Qt set-up and then generates and compiles the wrappers.  \nWhile still in development, it should work with any Qt version when complete.  There is no Qt included in the repository, users have to download and install Qt themselves.  \nFor now, Qt MinGW for Windows has been the only tested version.  \nQt for OS X and Linux are planned, Qt for VC++ has not been planned for now.  The source code is separated into a library that contains the settings and passes the generator needs, and a command-line client.  \nIn the future, a GUI client, constructed with Qt# itself, is planned as well.", 
+            "title": "QtSharp"
+        }, 
+        {
+            "location": "/#getting-started", 
+            "text": "You need to deploy Qt itself by following  http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies .  \nIn addition, for each Qt module you use you also need Qt -inlines.dll deployed alongside your executable.  \nYou can use QtSharp with any C# IDE, including Visual Studio, but make sure your executable is 32-bit by either using the\nx86 configuration or AnyCPU with  Prefer 32-bit  checked.", 
+            "title": "Getting started"
+        }, 
+        {
+            "location": "/#examples", 
+            "text": "You can find examples at   https://github.com/dsoronda/QtSharpDemos  https://github.com/grbd/QtSharp.TestApps   Thanks to  https://github.com/dsoronda  and  https://github.com/grbd", 
+            "title": "Examples"
+        }, 
+        {
+            "location": "/#development", 
+            "text": "If you plan on getting involved with the development of QtSharp  \nthere s some notes associated with development included below.   Development Notes", 
+            "title": "Development"
+        }, 
+        {
+            "location": "/#coverage", 
+            "text": "QtSharp has been tested only with Qt for MinGW, and with Qt s built-in MinGW set-up, so far.", 
+            "title": "Coverage"
+        }, 
+        {
+            "location": "/#funding", 
+            "text": "In order to speed up the development of the project, I ve been looking for funding.\nThere are two ways for that.   The first one is sponsoring Qt# itself.  The second way would be paid assignments related to CppSharp  \n    For example bindings for other C++ libraries.   Either way is going to immensely benefit Qt#.", 
+            "title": "Funding"
+        }
+    ]
+}
