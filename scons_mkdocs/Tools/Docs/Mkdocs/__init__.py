@@ -4,21 +4,21 @@ In which case we include all the Mkdocs related builders
 Note MkdocsRunner is not a scons builder but a Class the other Builders use in common
 """
 
-from . import MkdocsServer, MkdocsBuilder, MkdocsJsonBuilder, MkdocsPublisher, MkdocsDoxyTemplate
+from . import MkdocsServer, MkdocsBuild, MkdocsJsonBuild, MkdocsPublish, MkdocsDoxyTemplate
 
 def generate(env):
     MkdocsServer.generate(env)
-    MkdocsBuilder.generate(env)
-    MkdocsJsonBuilder.generate(env)
+    MkdocsBuild.generate(env)
+    MkdocsJsonBuild.generate(env)
+    MkdocsPublish.generate(env)
 
-    MkdocsPublisher.generate(env)
     MkdocsDoxyTemplate.generate(env)
 
 def exists(env):
     if (MkdocsServer.exists(env) == False): return False
-    if (MkdocsBuilder.exists(env) == False): return False
-    if (MkdocsJsonBuilder.exists(env) == False): return False
+    if (MkdocsBuild.exists(env) == False): return False
+    if (MkdocsJsonBuild.exists(env) == False): return False
+    if (MkdocsPublish.exists(env) == False): return False
 
-    if (MkdocsPublisher.exists(env) == False): return False
     if (MkdocsDoxyTemplate.exists(env) == False): return False
     return True

@@ -68,11 +68,16 @@ def main():
 
 def print_useage(env):
     print ("Please use scons <target> where <target> is one of")
-    print ("  build         to make standalone HTML files")
-    print ("  build_doxygen to build Doxygen related files")
-    print ("  clean         to clean the output directory: " + env['Mkdocs_BuildDir'])
-    print ("  publish       publish the site to the gh-pages branch")
     print ("  serve         Serve the site out on a port for demoing")
+    print ("  build         to build the documentation as HTML files")
+    print ("  json          to build the documentation as JSON files")
+    print ("  clean         to clean the output directory")
+    print ("  publish       publish the site to the gh-pages branch")
+
+    print ("  pdf           to build the documentation as a pdf")
+    print ("  doxygen       to build Doxygen related files to be inserted into the docs")
+
+
 
 
 # Clean using the SCons build system

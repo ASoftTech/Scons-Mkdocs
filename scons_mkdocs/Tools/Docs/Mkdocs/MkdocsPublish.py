@@ -3,6 +3,9 @@ MkdocsPublish
   This tool will publish the mkdocs content to a github pages destination
 """
 
+# If you ever want to remove the remote published branch you can use something like
+# git push origin --delete gh-pages
+
 import os, sys
 import os.path as path
 from SCons.Script import *
@@ -40,9 +43,9 @@ def generate(env):
 def MkdocsPublish(env, commitmsg, source = None):
     """Wrapper for the Builder so that we can use a default on the source parameter"""
     if source:
-        return env.__MkdocsPublish(source, None, Mkdocs_CommitMsg=commitmsg)
+        return env.__MkdocsPublish(None, source, Mkdocs_CommitMsg=commitmsg)
     else:
-        return env.__MkdocsPublish('mkdocs.yml', None, Mkdocs_CommitMsg=commitmsg)
+        return env.__MkdocsPublish(None, 'mkdocs.yml', Mkdocs_CommitMsg=commitmsg)
 
 
 def __MkdocsPublish_modify_targets(target, source, env):
