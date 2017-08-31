@@ -1,5 +1,5 @@
 """
-MkdocsBuilder
+MkdocsBuild
   This tool will generate the documentation output as html using markdown files as an input
   via mkdocs to an output directory
 """
@@ -35,31 +35,32 @@ def generate(env):
     env.SetDefault(Mkdocs_ExtraArgs = [])
 
     # Register the builder
-    bld = Builder(action = __MkdocsBuilder_func, emitter = __MkdocsBuilder_modify_targets)
-    env.Append(BUILDERS = {'__MkdocsBuilder' : bld})
-    env.AddMethod(MkdocsBuilder, 'MkdocsBuilder')
+    bld = Builder(action = __MkdocsBuild_func, emitter = __MkdocsBuild_modify_targets)
+    env.Append(BUILDERS = {'__MkdocsBuild' : bld})
+    env.AddMethod(MkdocsBuild, 'MkdocsBuild')
 
 
-def MkdocsBuilder(env, source = None):
+def MkdocsBuild(env, source = None):
     """Wrapper for the Builder so that we can use a default on the source parameter"""
     if source:
-        return env.__MkdocsBuilder(source)
+        return env.__MkdocsBuild(source)
     else:
-        return env.__MkdocsBuilder('mkdocs.yml')
+        return env.__MkdocsBuild('mkdocs.yml')
 
 
-def __MkdocsBuilder_modify_targets(target, source, env):
+def __MkdocsBuild_modify_targets(target, source, env):
     del target[:]
     if env['Mkdocs_SiteDir']:
         dirnode = Dir(env['Mkdocs_SiteDir'])
     else:
         dirnode = Dir('site')
     target.append(dirnode)
+
     env.Clean(target, dirnode)
     return target, source
 
 
-def __MkdocsBuilder_func(target, source, env):
+def __MkdocsBuild_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
     cmdopts = ['mkdocs', 'build']
 

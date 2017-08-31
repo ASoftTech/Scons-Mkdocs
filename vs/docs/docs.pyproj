@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\;..\..\..\Scons-MkDocs</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -14,7 +14,7 @@
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>build</CommandLineArguments>
+    <CommandLineArguments>clean</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -44,14 +44,17 @@
     <Compile Include="..\..\docs\Mkdocs\SConstruct.py">
       <Link>SConstruct.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuilder.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuilder.py</Link>
+    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuild.py">
+      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
     </Compile>
     <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py">
       <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublisher.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublisher.py</Link>
+    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
+      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py">
+      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py</Link>
     </Compile>
     <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsServer.py">
       <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsServer.py</Link>

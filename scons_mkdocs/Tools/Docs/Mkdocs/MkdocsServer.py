@@ -6,6 +6,8 @@ This tool can be used to serve / preview the mkdocs output locally before publis
 import os, sys, os.path as path
 import SCons.Script
 from SCons.Environment import Environment
+from SCons.Script import *
+
 
 def exists(env):
     """return True if this tool is valid in this environment"""
@@ -37,10 +39,26 @@ def generate(env):
     # Additional Arguments
     env.SetDefault(Mkdocs_ExtraArgs = [])
 
-    # Register the method
+    # Register the builder
+    bld = Builder(action = __MkdocsServer_func)
+    env.Append(BUILDERS = {'__MkdocsServer' : bld})
     env.AddMethod(MkdocsServer, 'MkdocsServer')
 
-def MkdocsServer(env, cfgfile = None):
+
+def MkdocsServer(env, source = None):
+    """Wrapper for the Builder so that we can use a default on the source parameter"""
+    if source:
+        return env.__MkdocsServer(source)
+    else:
+        return env.__MkdocsServer('mkdocs.yml')
+
+
+def __MkdocsServer_func(target, source, env):
+    """Actual builder that does the job of running the server"""
+
+    if len(source) > 0:
+        cfgfile = source[0].abspath
+
     cmdopts = ['mkdocs', 'serve']
 
     if cfgfile:
