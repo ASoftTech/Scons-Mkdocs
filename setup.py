@@ -29,6 +29,7 @@ setup(
 
     install_requires=[
         'mkdocs>=0.16.3',
+        'mkdocs-pandoc>=0.2.6',
     ],
 
     entry_points={

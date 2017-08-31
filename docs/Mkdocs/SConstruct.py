@@ -43,6 +43,11 @@ def main():
         tgt = env.MkdocsJsonBuild()
         Default(tgt)
 
+    elif cmd == 'pandoc':
+        manual_clean(env)
+        tgt = env.MkdocsPandoc()
+        Default(tgt)
+
     elif cmd == 'clean':
         clean(env)
 
@@ -70,10 +75,14 @@ def print_useage(env):
     print ("Please use scons <target> where <target> is one of")
     print ("  serve         Serve the site out on a port for demoing")
     print ("  build         to build the documentation as HTML files")
-    print ("  json          to build the documentation as JSON files")
-    print ("  clean         to clean the output directory")
     print ("  publish       publish the site to the gh-pages branch")
+    print ("  clean         to clean the output directory")
 
+    print("Alternative Formats:")
+    print ("  json          to build the documentation as JSON files")
+    print ("  pandoc        to build the documentation as a Pandoc file")
+
+    # TODO
     print ("  pdf           to build the documentation as a pdf")
     print ("  doxygen       to build Doxygen related files to be inserted into the docs")
 

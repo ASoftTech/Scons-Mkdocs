@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs;..\..\..\Scons-MkDocs</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -14,7 +14,7 @@
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>publish</CommandLineArguments>
+    <CommandLineArguments>--debug=stacktrace pandoc</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -52,6 +52,12 @@
     </Compile>
     <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
       <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPandoc.py">
+      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPandoc.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPdf.py">
+      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPdf.py</Link>
     </Compile>
     <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py">
       <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py</Link>

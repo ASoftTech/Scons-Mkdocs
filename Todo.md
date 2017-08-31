@@ -1,29 +1,20 @@
 # Todo
 
-## Module Path
+## Pandoc
 
-Incorperate a ModulePath function into scons
+Account for arrays / lists in the exclusion list
 
-https://stackoverflow.com/questions/729583/getting-file-path-of-imported-module
-https://stackoverflow.com/questions/8380381/the-way-to-make-namespace-packages-in-python
-https://packaging.python.org/guides/packaging-namespace-packages/
+## Str wrap
 
+ether str wrap
+or use variable expansion such as $Parameter
+when pulling the parameters through to the builder
+need to account for File / Dir node type parameters
 
-def showModulePath(module):
-        if (hasattr(module, '__name__') is False):
-            print 'Error: ' + str(module) + ' is not a module object.'
-            return None
+also check dirs with spaces in them work
 
-
-        moduleName = module.__name__
-        modulePath = None
-        if imp.is_builtin(moduleName):
-            modulePath = sys.modules[moduleName];
-        else:
-            modulePath = inspect.getsourcefile(module)
-            modulePath = '<module \'' + moduleName + '\' from \'' + modulePath + 'c\'>'
-        print modulePath 
-        return modulePath
+## Entry Points
 
 setup scons to use entry points
 https://stackoverflow.com/questions/774824/explain-python-entry-points
+http://amir.rachum.com/blog/2017/07/28/python-entry-points/
