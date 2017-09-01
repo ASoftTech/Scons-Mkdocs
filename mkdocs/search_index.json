@@ -1,39 +1,119 @@
 {
     "docs": [
         {
-            "location": "/", 
-            "text": "QtSharp\n\n\nMono/.NET bindings for Qt\n\n\nThis project aims to create Mono/.NET libraries that wrap Qt (\nhttps://qt-project.org/\n) thus enabling its usage through C#. \n\nIt relies on the excellent CppSharp (\nhttps://github.com/mono/CppSharp\n). \n\nCppSharp is a generator that expects the include and library directories of a Qt set-up and then generates and compiles the wrappers. \n\nWhile still in development, it should work with any Qt version when complete.\n\n\nThere is no Qt included in the repository, users have to download and install Qt themselves. \n\nFor now, Qt MinGW for Windows has been the only tested version. \n\nQt for OS X and Linux are planned, Qt for VC++ has not been planned for now.\n\n\nThe source code is separated into a library that contains the settings and passes the generator needs, and a command-line client. \n\nIn the future, a GUI client, constructed with Qt# itself, is planned as well.\n\n\nGetting started\n\n\nYou need to deploy Qt itself by following \nhttp://doc.qt.io/qt-5/windows-deployment.html#application-dependencies\n. \n\nIn addition, for each Qt module you use you also need Qt\n-inlines.dll deployed alongside your executable. \n\nYou can use QtSharp with any C# IDE, including Visual Studio, but make sure your executable is 32-bit by either using the\nx86 configuration or AnyCPU with \nPrefer 32-bit\n checked.\n\n\nExamples\n\n\nYou can find examples at\n\n\n\n\nhttps://github.com/dsoronda/QtSharpDemos\n\n\nhttps://github.com/grbd/QtSharp.TestApps\n\n\n\n\nThanks to \nhttps://github.com/dsoronda\n and \nhttps://github.com/grbd\n\n\nDevelopment\n\n\nIf you plan on getting involved with the development of QtSharp \n\nthere\ns some notes associated with development included below.\n\n\n\n\nDevelopment Notes\n\n\n\n\nCoverage\n\n\nQtSharp has been tested only with Qt for MinGW, and with Qt\ns built-in MinGW set-up, so far.\n\n\nFunding\n\n\nIn order to speed up the development of the project, I\nve been looking for funding.\nThere are two ways for that.\n\n\n\n\nThe first one is sponsoring Qt# itself.\n\n\nThe second way would be paid assignments related to CppSharp \n\n    For example bindings for other C++ libraries.\n\n\n\n\nEither way is going to immensely benefit Qt#.", 
+            "location": "/",
+            "text": "Scons Tools - Grbd\n\n\nOverview\n\n\nThis is a collection of tools / tests for scons. \n\nThis includes:\n\n\n\n\nMkdocs\n\n\nPandoc\n\n\nDoxygen",
             "title": "Home"
-        }, 
+        },
         {
-            "location": "/#qtsharp", 
-            "text": "Mono/.NET bindings for Qt  This project aims to create Mono/.NET libraries that wrap Qt ( https://qt-project.org/ ) thus enabling its usage through C#.  \nIt relies on the excellent CppSharp ( https://github.com/mono/CppSharp ).  \nCppSharp is a generator that expects the include and library directories of a Qt set-up and then generates and compiles the wrappers.  \nWhile still in development, it should work with any Qt version when complete.  There is no Qt included in the repository, users have to download and install Qt themselves.  \nFor now, Qt MinGW for Windows has been the only tested version.  \nQt for OS X and Linux are planned, Qt for VC++ has not been planned for now.  The source code is separated into a library that contains the settings and passes the generator needs, and a command-line client.  \nIn the future, a GUI client, constructed with Qt# itself, is planned as well.", 
-            "title": "QtSharp"
-        }, 
+            "location": "/#scons-tools-grbd",
+            "text": "",
+            "title": "Scons Tools - Grbd"
+        },
         {
-            "location": "/#getting-started", 
-            "text": "You need to deploy Qt itself by following  http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies .  \nIn addition, for each Qt module you use you also need Qt -inlines.dll deployed alongside your executable.  \nYou can use QtSharp with any C# IDE, including Visual Studio, but make sure your executable is 32-bit by either using the\nx86 configuration or AnyCPU with  Prefer 32-bit  checked.", 
-            "title": "Getting started"
-        }, 
+            "location": "/#overview",
+            "text": "This is a collection of tools / tests for scons.  \nThis includes:   Mkdocs  Pandoc  Doxygen",
+            "title": "Overview"
+        },
         {
-            "location": "/#examples", 
-            "text": "You can find examples at   https://github.com/dsoronda/QtSharpDemos  https://github.com/grbd/QtSharp.TestApps   Thanks to  https://github.com/dsoronda  and  https://github.com/grbd", 
-            "title": "Examples"
-        }, 
+            "location": "/Builders/Mkdocs/MkdocsServer/",
+            "text": "MkdocsServer\n\n\nOverview\n\n\nThis builder can be used to trigger Mkdocs into server mode.\nThis is useful when you want a preview of the site that will be built before publishing it live to github pages.\n\n\nDuring server mode mkdocs pulls all the markdown and images into memory before rendering it as a http server.\nTypically via the link of\n\n\n\n\nhttp://127.0.0.1:8000\n\n\n\n\nWith live reload enabled (which is the default) and changes make to the markdown files will auto trigger a reload of the web page\nto reflect any changes made.\n\n\nOne example use case of the MkdocsServer builder would be to have other builders change the source //docs// directory\n(such as importing doxygen generated files)\nBefore triggering the MkdocsServer builder to then serve out the page as a preview.\nThis could be done via the scons dependency mechanism.\n\n\nExample useage:\n\n\nEnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsServer()\nDefault(target)\n\n\n\n\nOptionally a source parameter can be passed to specify a different location of mkdocs.yml\n\n\ntarget = env.MkdocsServer('someother.yml')\n\n\n\n\nAn example of changing a setting:\n\n\nenv.Replace(Mkdocs_ServeUrl = '127.0.0.1:8001')\nenv.Replace(Mkdocs_Strict = True)\n\n\n\n\nAvailable Options\n\n\n\n\n\n\n\n\nenv setting\n\n\nValues\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nMkdocs_WorkingDir\n\n\nCurrent Directory\n\n\nCan be set to override the working directory where mkdocs will be run\n\n\n\n\n\n\nMkdocs_ServeUrl\n\n\nNone, \u2018127.0.0.1:8000\u2019 (default)\n\n\nThe server URL to use when hosting the page\n\n\n\n\n\n\nMkdocs_Strict\n\n\nFalse (default), True\n\n\nIf to use mkdocs in strict mode\n\n\n\n\n\n\nMkdocs_Theme\n\n\nNone (default), \u2018cyborg\u2019\n\n\nThis setting can be used to override the theme specified within mkdocs.yml\n\n\n\n\n\n\nMkdocs_ThemeDir\n\n\nNone (default), \u2018theme\u2019\n\n\nThis setting can be used to override / specify a theme directory to overlay files on top of the selected theme\n\n\n\n\n\n\nMkdocs_LiveReload\n\n\nNone (default), True, False\n\n\nIf to enable / disable the live reload on change of source markdown (default in on)\n\n\n\n\n\n\nMkdocs_DirtyReload\n\n\nFalse (default), True\n\n\nIf to enable dirty reload mode\n\n\n\n\n\n\nMkdocs_Quiet\n\n\nFalse (default), True\n\n\nSilence warnings\n\n\n\n\n\n\nMkdocs_Verbose\n\n\nFalse (default), True\n\n\nEnable verbose output\n\n\n\n\n\n\nMkdocs_ExtraArgs\n\n\n[] (default)\n\n\nAdditional options to pass to mkdocs as an array",
+            "title": "MkdocsServer"
+        },
         {
-            "location": "/#development", 
-            "text": "If you plan on getting involved with the development of QtSharp  \nthere s some notes associated with development included below.   Development Notes", 
-            "title": "Development"
-        }, 
+            "location": "/Builders/Mkdocs/MkdocsServer/#mkdocsserver",
+            "text": "",
+            "title": "MkdocsServer"
+        },
         {
-            "location": "/#coverage", 
-            "text": "QtSharp has been tested only with Qt for MinGW, and with Qt s built-in MinGW set-up, so far.", 
-            "title": "Coverage"
-        }, 
+            "location": "/Builders/Mkdocs/MkdocsServer/#overview",
+            "text": "This builder can be used to trigger Mkdocs into server mode.\nThis is useful when you want a preview of the site that will be built before publishing it live to github pages.  During server mode mkdocs pulls all the markdown and images into memory before rendering it as a http server.\nTypically via the link of   http://127.0.0.1:8000   With live reload enabled (which is the default) and changes make to the markdown files will auto trigger a reload of the web page\nto reflect any changes made.  One example use case of the MkdocsServer builder would be to have other builders change the source //docs// directory\n(such as importing doxygen generated files)\nBefore triggering the MkdocsServer builder to then serve out the page as a preview.\nThis could be done via the scons dependency mechanism.",
+            "title": "Overview"
+        },
         {
-            "location": "/#funding", 
-            "text": "In order to speed up the development of the project, I ve been looking for funding.\nThere are two ways for that.   The first one is sponsoring Qt# itself.  The second way would be paid assignments related to CppSharp  \n    For example bindings for other C++ libraries.   Either way is going to immensely benefit Qt#.", 
-            "title": "Funding"
+            "location": "/Builders/Mkdocs/MkdocsServer/#example-useage",
+            "text": "EnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsServer()\nDefault(target)  Optionally a source parameter can be passed to specify a different location of mkdocs.yml  target = env.MkdocsServer('someother.yml')  An example of changing a setting:  env.Replace(Mkdocs_ServeUrl = '127.0.0.1:8001')\nenv.Replace(Mkdocs_Strict = True)",
+            "title": "Example useage:"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsServer/#available-options",
+            "text": "env setting  Values  Description      Mkdocs_WorkingDir  Current Directory  Can be set to override the working directory where mkdocs will be run    Mkdocs_ServeUrl  None, \u2018127.0.0.1:8000\u2019 (default)  The server URL to use when hosting the page    Mkdocs_Strict  False (default), True  If to use mkdocs in strict mode    Mkdocs_Theme  None (default), \u2018cyborg\u2019  This setting can be used to override the theme specified within mkdocs.yml    Mkdocs_ThemeDir  None (default), \u2018theme\u2019  This setting can be used to override / specify a theme directory to overlay files on top of the selected theme    Mkdocs_LiveReload  None (default), True, False  If to enable / disable the live reload on change of source markdown (default in on)    Mkdocs_DirtyReload  False (default), True  If to enable dirty reload mode    Mkdocs_Quiet  False (default), True  Silence warnings    Mkdocs_Verbose  False (default), True  Enable verbose output    Mkdocs_ExtraArgs  [] (default)  Additional options to pass to mkdocs as an array",
+            "title": "Available Options"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsBuild/",
+            "text": "MkdocsBuild\n\n\nOverview\n\n\nThis builder can be used to trigger Mkdocs into building the source markdown into a html output on disk.\nThis is typically the sort of thing you would do before publishing the html content to a site.\n\n\nExample useage:\n\n\nEnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsBuild()\nDefault(target)\n\n\n\n\nOptionally a source parameter can be passed to specify a different location of mkdocs.yml\n\n\ntarget = env.MkdocsBuild('someother.yml')\n\n\n\n\nAn example of changing a setting:\n\n\nenv.Replace(Mkdocs_CleanBuild = True)\nenv.Replace(Mkdocs_Strict = True)\n\n\n\n\nAvailable Options\n\n\n\n\n\n\n\n\nenv setting\n\n\nValues\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nMkdocs_WorkingDir\n\n\nCurrent Directory\n\n\nCan be set to override the working directory where mkdocs will be run\n\n\n\n\n\n\nMkdocs_CleanBuild\n\n\nNone (default), True, False\n\n\nIf to clean the build directory during the build (default is yes)\n\n\n\n\n\n\nMkdocs_Strict\n\n\nFalse (default), True\n\n\nIf to use mkdocs in strict mode\n\n\n\n\n\n\nMkdocs_Theme\n\n\nNone (default), \u2018cyborg\u2019\n\n\nThis setting can be used to override the theme specified within mkdocs.yml\n\n\n\n\n\n\nMkdocs_ThemeDir\n\n\nNone (default), \u2018theme\u2019\n\n\nThis setting can be used to override / specify a theme directory to overlay files on top of the selected theme\n\n\n\n\n\n\nMkdocs_SiteDir\n\n\n\u2018site\u2019 (default)\n\n\nThis setting controls the output directory for the html to be rendered\n\n\n\n\n\n\nMkdocs_Quiet\n\n\nFalse (default), True\n\n\nSilence warnings\n\n\n\n\n\n\nMkdocs_Verbose\n\n\nFalse (default), True\n\n\nEnable verbose output\n\n\n\n\n\n\nMkdocs_ExtraArgs\n\n\n[] (default)\n\n\nAdditional options to pass to mkdocs as an array",
+            "title": "MkdocsBuild"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsBuild/#mkdocsbuild",
+            "text": "",
+            "title": "MkdocsBuild"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsBuild/#overview",
+            "text": "This builder can be used to trigger Mkdocs into building the source markdown into a html output on disk.\nThis is typically the sort of thing you would do before publishing the html content to a site.",
+            "title": "Overview"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsBuild/#example-useage",
+            "text": "EnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsBuild()\nDefault(target)  Optionally a source parameter can be passed to specify a different location of mkdocs.yml  target = env.MkdocsBuild('someother.yml')  An example of changing a setting:  env.Replace(Mkdocs_CleanBuild = True)\nenv.Replace(Mkdocs_Strict = True)",
+            "title": "Example useage:"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsBuild/#available-options",
+            "text": "env setting  Values  Description      Mkdocs_WorkingDir  Current Directory  Can be set to override the working directory where mkdocs will be run    Mkdocs_CleanBuild  None (default), True, False  If to clean the build directory during the build (default is yes)    Mkdocs_Strict  False (default), True  If to use mkdocs in strict mode    Mkdocs_Theme  None (default), \u2018cyborg\u2019  This setting can be used to override the theme specified within mkdocs.yml    Mkdocs_ThemeDir  None (default), \u2018theme\u2019  This setting can be used to override / specify a theme directory to overlay files on top of the selected theme    Mkdocs_SiteDir  \u2018site\u2019 (default)  This setting controls the output directory for the html to be rendered    Mkdocs_Quiet  False (default), True  Silence warnings    Mkdocs_Verbose  False (default), True  Enable verbose output    Mkdocs_ExtraArgs  [] (default)  Additional options to pass to mkdocs as an array",
+            "title": "Available Options"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsPublish/",
+            "text": "MkdocsPublish\n\n\nOverview\n\n\nThis builder can be used to trigger Mkdocs into pushing the build output to the github pages branch.\nThis way it will be visible publicly.\n\n\nTypically the output will be visible under something like\n\n\n\n\nhttp://\nOrganisationName\n.github.io/\nRepoName\n\n\n\n\nExample useage:\n\n\nEnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsPublish('commit message')\nDefault(target)\n\n\n\n\nOptionally a source parameter can be passed to specify a different location of mkdocs.yml\n\n\ntarget = env.MkdocsPublish('commit message', 'someother.yml')\n\n\n\n\nAn example of changing a setting:\n\n\nenv.Replace(Mkdocs_CleanBuild = True)\n\n\n\n\nAvailable Options\n\n\n\n\n\n\n\n\nenv setting\n\n\nValues\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nMkdocs_WorkingDir\n\n\nCurrent Directory\n\n\nCan be set to override the working directory where mkdocs will be run\n\n\n\n\n\n\nMkdocs_CleanBuild\n\n\nNone (default), True, False\n\n\nIf to clean the build directory during the build (default is yes)\n\n\n\n\n\n\nMkdocs_RemoteBranch\n\n\nNone (default)\n\n\nOverride the remote branch name to use when pushing to github\n\n\n\n\n\n\nMkdocs_RemoteName\n\n\nNone (default)\n\n\nOverride the remote name to use when pushing to github\n\n\n\n\n\n\nMkdocs_ForcePush\n\n\nFalse (default), True\n\n\nDo a force push when pushing to github\n\n\n\n\n\n\nMkdocs_Quiet\n\n\nFalse (default), True\n\n\nSilence warnings\n\n\n\n\n\n\nMkdocs_Verbose\n\n\nFalse (default), True\n\n\nEnable verbose output\n\n\n\n\n\n\nMkdocs_ExtraArgs\n\n\n[] (default)\n\n\nAdditional options to pass to mkdocs as an array",
+            "title": "MkdocsPublish"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsPublish/#mkdocspublish",
+            "text": "",
+            "title": "MkdocsPublish"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsPublish/#overview",
+            "text": "This builder can be used to trigger Mkdocs into pushing the build output to the github pages branch.\nThis way it will be visible publicly.  Typically the output will be visible under something like   http:// OrganisationName .github.io/ RepoName",
+            "title": "Overview"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsPublish/#example-useage",
+            "text": "EnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsPublish('commit message')\nDefault(target)  Optionally a source parameter can be passed to specify a different location of mkdocs.yml  target = env.MkdocsPublish('commit message', 'someother.yml')  An example of changing a setting:  env.Replace(Mkdocs_CleanBuild = True)",
+            "title": "Example useage:"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsPublish/#available-options",
+            "text": "env setting  Values  Description      Mkdocs_WorkingDir  Current Directory  Can be set to override the working directory where mkdocs will be run    Mkdocs_CleanBuild  None (default), True, False  If to clean the build directory during the build (default is yes)    Mkdocs_RemoteBranch  None (default)  Override the remote branch name to use when pushing to github    Mkdocs_RemoteName  None (default)  Override the remote name to use when pushing to github    Mkdocs_ForcePush  False (default), True  Do a force push when pushing to github    Mkdocs_Quiet  False (default), True  Silence warnings    Mkdocs_Verbose  False (default), True  Enable verbose output    Mkdocs_ExtraArgs  [] (default)  Additional options to pass to mkdocs as an array",
+            "title": "Available Options"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsJsonBuild/",
+            "text": "MkdocsJsonBuild\n\n\nOverview\n\n\nThis builder can be used to trigger Mkdocs into building the source markdown into a json output on disk.\nThis can be used as an import into other tools.\n\n\nExample useage:\n\n\nEnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsJsonBuild()\nDefault(target)\n\n\n\n\nOptionally a source parameter can be passed to specify a different location of mkdocs.yml\n\n\ntarget = env.MkdocsJsonBuild('someother.yml')\n\n\n\n\nAn example of changing a setting:\n\n\nenv.Replace(Mkdocs_CleanBuild = True)\nenv.Replace(Mkdocs_Strict = True)\n\n\n\n\nAvailable Options\n\n\n\n\n\n\n\n\nenv setting\n\n\nValues\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nMkdocs_WorkingDir\n\n\nCurrent Directory\n\n\nCan be set to override the working directory where mkdocs will be run\n\n\n\n\n\n\nMkdocs_CleanBuild\n\n\nNone (default), True, False\n\n\nIf to clean the build directory during the build (default is yes)\n\n\n\n\n\n\nMkdocs_Strict\n\n\nFalse (default), True\n\n\nIf to use mkdocs in strict mode\n\n\n\n\n\n\nMkdocs_SiteDir\n\n\n\u2018site\u2019 (default)\n\n\nThis setting controls the output directory for the html to be rendered\n\n\n\n\n\n\nMkdocs_Quiet\n\n\nFalse (default), True\n\n\nSilence warnings\n\n\n\n\n\n\nMkdocs_Verbose\n\n\nFalse (default), True\n\n\nEnable verbose output\n\n\n\n\n\n\nMkdocs_ExtraArgs\n\n\n[] (default)\n\n\nAdditional options to pass to mkdocs as an array",
+            "title": "MkdocsJsonBuild"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsJsonBuild/#mkdocsjsonbuild",
+            "text": "",
+            "title": "MkdocsJsonBuild"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsJsonBuild/#overview",
+            "text": "This builder can be used to trigger Mkdocs into building the source markdown into a json output on disk.\nThis can be used as an import into other tools.",
+            "title": "Overview"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsJsonBuild/#example-useage",
+            "text": "EnsureSConsVersion(3,0,0)\nenv = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])\ntarget = env.MkdocsJsonBuild()\nDefault(target)  Optionally a source parameter can be passed to specify a different location of mkdocs.yml  target = env.MkdocsJsonBuild('someother.yml')  An example of changing a setting:  env.Replace(Mkdocs_CleanBuild = True)\nenv.Replace(Mkdocs_Strict = True)",
+            "title": "Example useage:"
+        },
+        {
+            "location": "/Builders/Mkdocs/MkdocsJsonBuild/#available-options",
+            "text": "env setting  Values  Description      Mkdocs_WorkingDir  Current Directory  Can be set to override the working directory where mkdocs will be run    Mkdocs_CleanBuild  None (default), True, False  If to clean the build directory during the build (default is yes)    Mkdocs_Strict  False (default), True  If to use mkdocs in strict mode    Mkdocs_SiteDir  \u2018site\u2019 (default)  This setting controls the output directory for the html to be rendered    Mkdocs_Quiet  False (default), True  Silence warnings    Mkdocs_Verbose  False (default), True  Enable verbose output    Mkdocs_ExtraArgs  [] (default)  Additional options to pass to mkdocs as an array",
+            "title": "Available Options"
         }
     ]
 }

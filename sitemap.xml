@@ -3,10 +3,20 @@
 
     
     <url>
-     <loc>http://ASoftTech.github.io/Gtk3-Sharp-Core/</loc>
-     <lastmod>2017-08-31</lastmod>
+     <loc>http://ASoftTech.github.io/Scons-Tools-Grbd/</loc>
+     <lastmod>2017-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
+        
+    <url>
+     <loc>http://ASoftTech.github.io/Scons-Tools-Grbd</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>

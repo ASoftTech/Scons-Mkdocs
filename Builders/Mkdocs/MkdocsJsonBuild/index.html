@@ -4,20 +4,20 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Scons-Tools-Grbd - Tools for scons">
         
-        <link rel="canonical" href="http://ASoftTech.github.io/Scons-Tools-Grbd/">
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        
+        <link rel="canonical" href="http://ASoftTech.github.io/Scons-Tools-Grbd/Builders/Mkdocs/MkdocsJsonBuild/">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Scons-Tools-Grbd</title>
+	<title>MkdocsJsonBuild - Scons-Tools-Grbd</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
-        <link href="./css/base.css" rel="stylesheet">
-        <link href="./css/highlight-fix.css" rel="stylesheet">
-        <link href="./css/highlight-custom.css" rel="stylesheet">
-        <link href="./css/navbarfix.css" rel="stylesheet">
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link href="../../../css/highlight-fix.css" rel="stylesheet">
+        <link href="../../../css/highlight-custom.css" rel="stylesheet">
+        <link href="../../../css/navbarfix.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -44,7 +44,7 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">Scons-Tools-Grbd</a>
+            <a class="navbar-brand" href="../../..">Scons-Tools-Grbd</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -53,13 +53,13 @@
             <ul class="nav navbar-nav">
             
             
-                <li class="active">
-                    <a href=".">Home</a>
+                <li >
+                    <a href="../../..">Home</a>
                 </li>
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Builders <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -70,25 +70,25 @@
         
             
 <li >
-    <a href="Builders/Mkdocs/MkdocsServer/">MkdocsServer</a>
+    <a href="../MkdocsServer/">MkdocsServer</a>
 </li>
 
         
             
 <li >
-    <a href="Builders/Mkdocs/MkdocsBuild/">MkdocsBuild</a>
+    <a href="../MkdocsBuild/">MkdocsBuild</a>
 </li>
 
         
             
 <li >
-    <a href="Builders/Mkdocs/MkdocsPublish/">MkdocsPublish</a>
+    <a href="../MkdocsPublish/">MkdocsPublish</a>
 </li>
 
         
             
-<li >
-    <a href="Builders/Mkdocs/MkdocsJsonBuild/">MkdocsJsonBuild</a>
+<li class="active">
+    <a href="./">MkdocsJsonBuild</a>
 </li>
 
         
@@ -105,20 +105,20 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="./doxygen/namespaces.html">Doxygen</a>
+                    <a href="../../../doxygen/namespaces.html">Doxygen</a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
                         <i class="fa fa-search"></i> Search
                     </a>
                 </li>
-                <li class="disabled">
-                    <a rel="next" >
+                <li >
+                    <a rel="next" href="../MkdocsPublish/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                <li >
-                    <a rel="prev" href="Builders/Mkdocs/MkdocsServer/">
+                <li class="disabled">
+                    <a rel="prev" >
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -133,7 +133,7 @@
                 </li>
                 <li>
                     
-                      <a href="https://github.com/ASoftTech/Scons-Tools-Grbd/edit/master/docs/MkDocs/docs/index.md"
+                      <a href="https://github.com/ASoftTech/Scons-Tools-Grbd/edit/master/docs/MkDocs/docs/Builders\Mkdocs\MkdocsJsonBuild.md"
                         class="icon icon-github"> Edit</a>
                     
                 </li>
@@ -147,24 +147,86 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#scons-tools-grbd">Scons Tools - Grbd</a></li>
+        <li class="main active"><a href="#mkdocsjsonbuild">MkdocsJsonBuild</a></li>
         
             <li><a href="#overview">Overview</a></li>
+        
+            <li><a href="#example-useage">Example useage:</a></li>
+        
+            <li><a href="#available-options">Available Options</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="scons-tools-grbd">Scons Tools - Grbd</h1>
+<h1 id="mkdocsjsonbuild">MkdocsJsonBuild</h1>
 <h2 id="overview">Overview</h2>
-<p>This is a collection of tools / tests for scons. <br>
-This includes:</p>
-<ul>
-<li>Mkdocs</li>
-<li>Pandoc</li>
-<li>Doxygen</li>
-</ul></div>
+<p>This builder can be used to trigger Mkdocs into building the source markdown into a json output on disk.
+This can be used as an import into other tools.</p>
+<h2 id="example-useage">Example useage:</h2>
+<pre><code class="python">EnsureSConsVersion(3,0,0)
+env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+target = env.MkdocsJsonBuild()
+Default(target)
+</code></pre>
+
+<p>Optionally a source parameter can be passed to specify a different location of mkdocs.yml</p>
+<pre><code class="python">target = env.MkdocsJsonBuild('someother.yml')
+</code></pre>
+
+<p>An example of changing a setting:</p>
+<pre><code class="python">env.Replace(Mkdocs_CleanBuild = True)
+env.Replace(Mkdocs_Strict = True)
+</code></pre>
+
+<h2 id="available-options">Available Options</h2>
+<table>
+<thead>
+<tr>
+<th>env setting</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mkdocs_WorkingDir</td>
+<td>Current Directory</td>
+<td>Can be set to override the working directory where mkdocs will be run</td>
+</tr>
+<tr>
+<td>Mkdocs_CleanBuild</td>
+<td>None (default), True, False</td>
+<td>If to clean the build directory during the build (default is yes)</td>
+</tr>
+<tr>
+<td>Mkdocs_Strict</td>
+<td>False (default), True</td>
+<td>If to use mkdocs in strict mode</td>
+</tr>
+<tr>
+<td>Mkdocs_SiteDir</td>
+<td>&lsquo;site&rsquo; (default)</td>
+<td>This setting controls the output directory for the html to be rendered</td>
+</tr>
+<tr>
+<td>Mkdocs_Quiet</td>
+<td>False (default), True</td>
+<td>Silence warnings</td>
+</tr>
+<tr>
+<td>Mkdocs_Verbose</td>
+<td>False (default), True</td>
+<td>Enable verbose output</td>
+</tr>
+<tr>
+<td>Mkdocs_ExtraArgs</td>
+<td>[] (default)</td>
+<td>Additional options to pass to mkdocs as an array</td>
+</tr>
+</tbody>
+</table></div>
         </div>
 
         <footer class="col-md-12">
@@ -173,12 +235,12 @@ This includes:</p>
             <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
         </footer>
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script>var base_url = '.';</script>
-        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">
