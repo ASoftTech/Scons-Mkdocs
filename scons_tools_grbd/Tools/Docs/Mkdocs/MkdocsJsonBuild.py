@@ -4,18 +4,19 @@ MkdocsJsonBuild
   via mkdocs to an output directory
 """
 
-import os, sys
-import os.path as path
+import os, sys, os.path as path
+import SCons.Script
+from SCons.Environment import Environment
 from SCons.Script import *
 
 def exists(env):
-    """return True if this tool is valid in this environment"""
-    return True
+    """Make sure mkdocs exists"""
+    return env.Detect("mkdocs")
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.').abspath)
+    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
     # If to Remove old files from the site_dir before building (the default).
     env.SetDefault(Mkdocs_CleanBuild = None)
@@ -60,7 +61,7 @@ def __MkdocsJsonBuild_func(target, source, env):
     cmdopts = ['mkdocs', 'json']
 
     for srcitem in source:
-        cfgfile = srcitem.abspath
+        cfgfile = str(srcitem)
 
         if cfgfile:
             cmdopts.append('--config-file=' + cfgfile)
@@ -74,7 +75,7 @@ def __MkdocsJsonBuild_func(target, source, env):
             cmdopts.append('--strict')
 
         if env['Mkdocs_SiteDir']:
-            cmdopts.append('--site-dir=' + env['Mkdocs_SiteDir'])
+            cmdopts.append('--site-dir=' + str(env['Mkdocs_SiteDir']))
 
         if env['Mkdocs_Quiet']:
             cmdopts.append('--quiet')

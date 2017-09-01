@@ -16,7 +16,7 @@ def exists(env):
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.').abspath)
+    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
     # If to Remove old files from the site_dir before building (the default).
     env.SetDefault(Mkdocs_CleanBuild = None)

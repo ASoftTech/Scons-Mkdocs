@@ -1,5 +1,8 @@
 # Todo
 
+  * Test cleanup in all instances
+  * write more tests
+
 ## Pandoc
 
 Account for arrays / lists in the exclusion list

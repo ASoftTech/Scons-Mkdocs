@@ -6,18 +6,19 @@ MkdocsPublish
 # If you ever want to remove the remote published branch you can use something like
 # git push origin --delete gh-pages
 
-import os, sys
-import os.path as path
+import os, sys, os.path as path
+import SCons.Script
+from SCons.Environment import Environment
 from SCons.Script import *
 
 def exists(env):
-    """return True if this tool is valid in this environment"""
-    return True
+    """Make sure mkdocs exists"""
+    return env.Detect("mkdocs")
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.').abspath)
+    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
     # If to Remove old files from the site_dir before building (the default).
     env.SetDefault(Mkdocs_CleanBuild = None)
@@ -65,7 +66,7 @@ def __MkdocsPublish_func(target, source, env):
     cmdopts = ['mkdocs', 'gh-deploy']
 
     for srcitem in source:
-        cfgfile = srcitem.abspath
+        cfgfile = str(srcitem)
 
         if cfgfile:
             cmdopts.append('--config-file=' + cfgfile)
@@ -77,13 +78,13 @@ def __MkdocsPublish_func(target, source, env):
 
         if not env['Mkdocs_CommitMsg']:
             raise Exception('No commit message specified')
-        cmdopts.append('--message=' + env['Mkdocs_CommitMsg'])
+        cmdopts.append('--message=' + str(env['Mkdocs_CommitMsg']))
 
         if env['Mkdocs_RemoteBranch']:
-            cmdopts.append('--remote-branch=' + env['Mkdocs_RemoteBranch'])
+            cmdopts.append('--remote-branch=' + str(env['Mkdocs_RemoteBranch']))
 
         if env['Mkdocs_RemoteName']:
-            cmdopts.append('--remote-name=' + env['Mkdocs_RemoteName'])
+            cmdopts.append('--remote-name=' + str(env['Mkdocs_RemoteName']))
             
         if env['Mkdocs_ForcePush']:
             cmdopts.append('--force')

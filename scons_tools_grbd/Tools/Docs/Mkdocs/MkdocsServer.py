@@ -16,7 +16,7 @@ def exists(env):
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.').abspath)
+    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
     # Default is '127.0.0.1:8000'
     env.SetDefault(Mkdocs_ServeUrl = None)

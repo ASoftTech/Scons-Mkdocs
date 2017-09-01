@@ -22,12 +22,12 @@ This could be done via the scons dependency mechanism.
 
 ```python
 EnsureSConsVersion(3,0,0)
-env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_grbd_docs.Tools')])
+env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
 target = env.MkdocsServer()
 Default(target)
 ```
 
-Optionally a source parameter can be passed to MkdocsServer to specify a different location of mkdocs.yml
+Optionally a source parameter can be passed to specify a different location of mkdocs.yml
 ```python
 target = env.MkdocsServer('someother.yml')
 ```
@@ -51,6 +51,6 @@ env.Replace(Mkdocs_Strict = True)
 | Mkdocs_ThemeDir | None (default), 'theme' | This setting can be used to override / specify a theme directory to overlay files on top of the selected theme |
 | Mkdocs_LiveReload | None (default), True, False | If to enable / disable the live reload on change of source markdown (default in on) |
 | Mkdocs_DirtyReload | False (default), True | If to enable dirty reload mode |
-| Mkdocs_Quiet | False (default, True | Silence warnings |
+| Mkdocs_Quiet | False (default), True | Silence warnings |
 | Mkdocs_Verbose | False (default), True | Enable verbose output |
 | Mkdocs_ExtraArgs | [] (default) | Additional options to pass to mkdocs as an array |

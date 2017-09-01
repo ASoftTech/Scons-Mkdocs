@@ -1,31 +1,18 @@
-site_name: Gtk3-Sharp-Core
-site_url: http://ASoftTech.github.io/Gtk3-Sharp-Core
-repo_url: https://github.com/ASoftTech/Gtk3-Sharp-Core
-site_description: GtkSharp3 Core - Gtk3 bindings for C# .Net Core
-edit_uri: edit/master/Docs/MkDocs/Docs
+site_name: Scons-Tools-Grbd
+site_url: http://ASoftTech.github.io/Scons-Tools-Grbd
+repo_url: https://github.com/ASoftTech/Scons-Tools-Grbd
+site_description: Scons-Tools-Grbd - Tools for scons
+edit_uri: edit/master/docs/MkDocs/docs
 
 pages:
 - Home: index.md
 
 - Builders:
     - Mkdocs:
-        - MkdocsBuild : Builders\Mkdocs\MkdocsBuild.md
         - MkdocsServer : Builders\Mkdocs\MkdocsServer.md
-
-#- Download:
-#    - Setup of Gtk: Download\Setup-Gtk.md
-#    - Downloading GtkSharp Core: Download\Downloading-GtkSharp.md
-
-#- Build:
-#    - Setup of Python Enviro: Build\Setup-Python.md
-#    - Setup of .Net Core SDK: Build\Setup-NetCore.md
-#    - Building GtkSharp: Build\Building-GtkSharp.md
-
-#- Generate Sources:
-#    - Overview: GenerateSources\Overview.md
-#    - Download of API Sources: GenerateSources\DownloadAPISources.md
-#    - Generating Code: GenerateSources\GeneratingCode.md
-#    - Perl Parser: GenerateSources\PerlParser.md
+        - MkdocsBuild : Builders\Mkdocs\MkdocsBuild.md
+        - MkdocsPublish : Builders\Mkdocs\MkdocsPublish.md
+        - MkdocsJsonBuild : Builders\Mkdocs\MkdocsJsonBuild.md
 
 #theme: cosmo
 theme: cyborg
