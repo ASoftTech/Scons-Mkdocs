@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name="scons-mkdocs",
+    name="scons-docs-grbd",
 
     version=VERSION,
     description='Scons wrapper tools for generating MkDocs documentation',
