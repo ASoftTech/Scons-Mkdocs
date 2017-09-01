@@ -4,13 +4,14 @@ MkdocsBuild
   via mkdocs to an output directory
 """
 
-import os, sys
-import os.path as path
+import os, sys, os.path as path
+import SCons.Script
+from SCons.Environment import Environment
 from SCons.Script import *
 
 def exists(env):
-    """return True if this tool is valid in this environment"""
-    return True
+    """Make sure mkdocs exists"""
+    return env.Detect("mkdocs")
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
@@ -65,7 +66,7 @@ def __MkdocsBuild_func(target, source, env):
     cmdopts = ['mkdocs', 'build']
 
     for srcitem in source:
-        cfgfile = srcitem.abspath
+        cfgfile = str(srcitem)
 
         if cfgfile:
             cmdopts.append('--config-file=' + cfgfile)
@@ -79,13 +80,13 @@ def __MkdocsBuild_func(target, source, env):
             cmdopts.append('--strict')
 
         if env['Mkdocs_Theme']:
-            cmdopts.append('--theme=' + env['Mkdocs_Theme'])
+            cmdopts.append('--theme=' + str(env['Mkdocs_Theme']))
 
         if env['Mkdocs_ThemeDir']:
-            cmdopts.append('--theme-dir=' + env['Mkdocs_ThemeDir'])
+            cmdopts.append('--theme-dir=' + str(env['Mkdocs_ThemeDir']))
 
         if env['Mkdocs_SiteDir']:
-            cmdopts.append('--site-dir=' + env['Mkdocs_SiteDir'])
+            cmdopts.append('--site-dir=' + str(env['Mkdocs_SiteDir']))
 
         if env['Mkdocs_Quiet']:
             cmdopts.append('--quiet')

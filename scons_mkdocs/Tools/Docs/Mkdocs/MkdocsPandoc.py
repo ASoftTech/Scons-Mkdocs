@@ -7,6 +7,8 @@ import os, sys
 import os.path as path
 from SCons.Script import *
 
+import subprocess, shutil
+
 def exists(env):
     """return True if this tool is valid in this environment"""
     return True
@@ -39,14 +41,11 @@ def MkdocsPandoc(env, target = None, source = None):
     if not source:
         source = File('mkdocs.yml')
     if not target:
-        target = File('test1.pd')
-        #target = File('site/mkdocs.pd')
+        target = File('site/mkdocs.pd')
     return env.__MkdocsPandoc(target, source)
 
 def __MkdocsPandoc_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
-
-    # TODO VStudio related error while finding this on the path (Scripts) of the virtual env
     cmdopts = ['mkdocs2pandoc']
 
     index = 0
@@ -75,6 +74,6 @@ def __MkdocsPandoc_func(target, source, env):
 
         cmdopts = cmdopts + env['Mkdocs_ExtraArgs']
 
-        print('Building MkDocs Documentation:')
+        print('Building MkDocs Documentation as Pandoc file:')
         env.Execute(env.Action([cmdopts], chdir=env['Mkdocs_WorkingDir']))
         index = index + 1

@@ -3,7 +3,6 @@
 # These import lines are not really needed, but it helps intellisense within VS when editing the script
 import SCons.Script
 from SCons.Environment import Environment
-from SCons.Script import Main
 
 import sys, os
 
@@ -13,8 +12,6 @@ dir_path = Dir('.').srcnode().abspath
 dir_path = os.path.join(dir_path, '../../')
 dir_path = os.path.abspath(dir_path)
 sys.path.append(dir_path)
-
-
 
 def main():
     # Setup environment
@@ -38,11 +35,22 @@ def main():
         tgt = env.MkdocsBuild()
         Default(tgt)
 
+
+
+
+
+
+
+
+
+
+
     elif cmd == 'json':
         manual_clean(env)
         tgt = env.MkdocsJsonBuild()
         Default(tgt)
 
+        # TODO test clean
     elif cmd == 'pandoc':
         manual_clean(env)
         tgt = env.MkdocsPandoc()
@@ -61,9 +69,20 @@ def main():
 
 
     elif cmd == 'pdf':
+        manual_clean(env)
+        pdtarget = env.MkdocsPandoc()
+        Default(pdtarget)
+
         print ("TODO pdf")
 
-    elif cmd == 'doxygen_templates':
+
+
+
+
+
+
+
+    elif cmd == 'doxygen':
         print ("TODO doxygen_templates")
 
     else:
@@ -114,8 +133,8 @@ def setup_opts(env):
 
     #env.Replace(Mkdocs_WorkingDir = env.Dir('.').abspath)
     #env.Replace(Mkdocs_ServeUrl = '127.0.0.1:8001')
-    #env.Replace(Mkdocs_Strict = 'True')
-    #env.Replace(Mkdocs_ThemeDir = 'theme')
+    #env.Replace(Mkdocs_Strict = True)
+    env.Replace(Mkdocs_ThemeDir = Dir('theme'))
     #env.Replace(Mkdocs_DirtyReload = True)
     #env.Replace(Mkdocs_SiteDir = 'site2')
     #env.Replace(Mkdocs_ExtraArgs = ['--verbose'])

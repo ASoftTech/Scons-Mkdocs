@@ -1,0 +1,33 @@
+import os, sys
+
+# TODO remove
+oldsyspath = sys.path
+dir_path = Dir('.').srcnode().abspath
+dir_path = os.path.join(dir_path, '../../../../../../')
+dir_path = os.path.abspath(dir_path)
+sys.path.append(dir_path)
+
+
+
+# First test
+env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_mkdocs.Tools')])
+env.Replace(Mkdocs_CleanBuild = True)
+env.Replace(Mkdocs_Strict = True)
+env.Replace(Mkdocs_Theme = 'cyborg')
+env.Replace(Mkdocs_ThemeDir = 'theme')
+env.Replace(Mkdocs_SiteDir = 'site')
+env.Replace(Mkdocs_Quiet = True)
+env.Replace(Mkdocs_Verbose = True)
+tgt = env.MkdocsBuild()
+Default(tgt)
+
+# Test with Node objects
+env2 = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_mkdocs.Tools')])
+env2.Replace(Mkdocs_Theme = Dir('cyborg'))
+env2.Replace(Mkdocs_ThemeDir = Dir('theme'))
+env2.Replace(Mkdocs_SiteDir = Dir('site2'))
+tgt = env2.MkdocsBuild(File('mkdocs.yml'))
+Default(tgt)
+
+# TODO remove
+sys.path = oldsyspath

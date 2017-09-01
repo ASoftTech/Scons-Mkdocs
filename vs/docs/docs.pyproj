@@ -14,7 +14,7 @@
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>--debug=stacktrace pandoc</CommandLineArguments>
+    <CommandLineArguments>serve</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

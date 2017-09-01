@@ -7,11 +7,6 @@ edit_uri: edit/master/Docs/MkDocs/Docs
 pages:
 - Home: index.md
 
-- Builders:
-    - Mkdocs:
-        - MkdocsBuild : Builders\Mkdocs\MkdocsBuild.md
-        - MkdocsServer : Builders\Mkdocs\MkdocsServer.md
-
 #- Download:
 #    - Setup of Gtk: Download\Setup-Gtk.md
 #    - Downloading GtkSharp Core: Download\Downloading-GtkSharp.md

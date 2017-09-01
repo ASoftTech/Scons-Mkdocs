@@ -10,8 +10,8 @@ from SCons.Script import *
 
 
 def exists(env):
-    """return True if this tool is valid in this environment"""
-    return True
+    """Make sure mkdocs exists"""
+    return env.Detect("mkdocs")
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
@@ -54,10 +54,10 @@ def MkdocsServer(env, source = None):
 
 
 def __MkdocsServer_func(target, source, env):
-    """Actual builder that does the job of running the server"""
+    """Actual builder that does the work after the Sconscript file is parsed"""
 
     if len(source) > 0:
-        cfgfile = source[0].abspath
+        cfgfile = str(source[0])
 
     cmdopts = ['mkdocs', 'serve']
 
@@ -66,17 +66,17 @@ def __MkdocsServer_func(target, source, env):
 
     serverurl = '127.0.0.1:8000'
     if env['Mkdocs_ServeUrl']:
-        cmdopts.append('--dev-addr=' + env['Mkdocs_ServeUrl'])
-        serverurl = env['Mkdocs_ServeUrl']
+        serverurl = str(env['Mkdocs_ServeUrl'])
+        cmdopts.append('--dev-addr=' + serverurl)
 
     if env['Mkdocs_Strict']:
         cmdopts.append('--strict')
 
     if env['Mkdocs_Theme']:
-        cmdopts.append('--theme=' + env['Mkdocs_Theme'])
+        cmdopts.append('--theme=' + str(env['Mkdocs_Theme']))
 
     if env['Mkdocs_ThemeDir']:
-        cmdopts.append('--theme-dir=' + env['Mkdocs_ThemeDir'])
+        cmdopts.append('--theme-dir=' + str(env['Mkdocs_ThemeDir']))
 
     if env['Mkdocs_LiveReload'] == True:
         cmdopts.append('--livereload')
