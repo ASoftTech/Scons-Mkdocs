@@ -16,7 +16,7 @@ sys.path.append(dir_path)
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_mkdocs.Tools')])
+    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
     # Use the first parameter as the mode to run as

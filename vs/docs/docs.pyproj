@@ -44,49 +44,49 @@
     <Compile Include="..\..\docs\Mkdocs\SConstruct.py">
       <Link>SConstruct.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuild.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPandoc.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPandoc.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPandoc.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPandoc.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPdf.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPdf.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPdf.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPdf.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsPublish.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPublish.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPublish.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\MkdocsServer.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\MkdocsServer.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsServer.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsServer.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\x_build.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\x_build.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\x_build.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\x_build.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\Mkdocs\__init__.py">
-      <Link>scons_mkdocs\Tools\Docs\Mkdocs\__init__.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\Docs\__init__.py">
-      <Link>scons_mkdocs\Tools\Docs\__init__.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\__init__.py">
+      <Link>scons_tools_grbd\Tools\Docs\__init__.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\Tools\__init__.py">
-      <Link>scons_mkdocs\Tools\__init__.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\__init__.py">
+      <Link>scons_tools_grbd\Tools\__init__.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_mkdocs\__init__.py">
-      <Link>scons_mkdocs\__init__.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\__init__.py">
+      <Link>scons_tools_grbd\__init__.py</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scons_mkdocs\" />
-    <Folder Include="scons_mkdocs\Tests\" />
-    <Folder Include="scons_mkdocs\Tools\" />
-    <Folder Include="scons_mkdocs\Tools\Docs\" />
-    <Folder Include="scons_mkdocs\Tools\Docs\Mkdocs\" />
+    <Folder Include="scons_tools_grbd\" />
+    <Folder Include="scons_tools_grbd\Tests\" />
+    <Folder Include="scons_tools_grbd\Tools\" />
+    <Folder Include="scons_tools_grbd\Tools\Docs\" />
+    <Folder Include="scons_tools_grbd\Tools\Docs\Mkdocs\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

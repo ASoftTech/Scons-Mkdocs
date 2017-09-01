@@ -11,19 +11,19 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name="scons-docs-grbd",
+    name="scons-tools-grbd",
 
     version=VERSION,
-    description='Scons wrapper tools for generating MkDocs documentation',
+    description='Scons tools for generating documentation and building source',
     long_description=long_description,
 
-    url='https://github.com/ASoftTech/scons-mkdocs.git',
+    url='https://github.com/ASoftTech/Scons-Tools-Grbd.git',
  
     author='Aperture Software Technologies Ltd.',
     author_email='garlicbready@googlemail.com',
 
     license='MIT',
-    packages=find_packages("scons_mkdocs"),
+    packages=find_packages("scons_tools_grbd"),
     keywords="pip package, mkdocs, scons",
     include_package_data=True,
 
@@ -34,10 +34,10 @@ setup(
 
     entry_points={
         'scons.tools': [
-            'docs_mkdocs = scons_mkdocs.Tools',
+            'scons_tools_grbd = scons_tools_grbd.Tools',
         ],
         'scons.tests': [
-            'docs_mkdocs = scons_mkdocs.Tests',
+            'scons_tools_grbd = scons_tools_grbd.Tests',
         ],
     },
 

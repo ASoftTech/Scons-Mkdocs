@@ -10,7 +10,7 @@ sys.path.append(dir_path)
 
 
 # First test
-env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_mkdocs.Tools')])
+env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
 env.Replace(Mkdocs_CleanBuild = True)
 env.Replace(Mkdocs_Strict = True)
 env.Replace(Mkdocs_Theme = 'cyborg')
@@ -22,7 +22,7 @@ tgt = env.MkdocsBuild()
 Default(tgt)
 
 # Test with Node objects
-env2 = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_mkdocs.Tools')])
+env2 = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
 env2.Replace(Mkdocs_Theme = Dir('cyborg'))
 env2.Replace(Mkdocs_ThemeDir = Dir('theme'))
 env2.Replace(Mkdocs_SiteDir = Dir('site2'))
