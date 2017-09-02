@@ -50,25 +50,31 @@ def main():
         tgt = env.MkdocsJsonBuild()
         Default(tgt)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    elif cmd == 'pandoc':
+    # TODO issue with mkdocs2pandoc and tables
+    elif cmd == 'mkpandoc':
         manual_clean(env)
-        tgt = env.MkdocsPandoc()
+        tgt = env.Mkdocs2Pandoc()
         Default(tgt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     elif cmd == 'pdf':
         manual_clean(env)
@@ -94,7 +100,7 @@ def print_useage(env):
 
     print ("Alternative Formats:")
     print ("  json          to build the documentation as JSON files")
-    print ("  pandoc        to build the documentation as a Pandoc markdown file")
+    print ("  mkpandoc      to build the documentation as a Pandoc markdown file")
 
     # TODO
     print ("  pdf           to build the documentation as a pdf")
@@ -126,10 +132,12 @@ def setup_opts(env):
     env.Replace(Mkdocs_Theme = 'cyborg')
     env.Replace(Mkdocs_CleanBuild = True)
 
+    env.Replace(Mkdocs = 'mkdocs')
+
     #env.Replace(Mkdocs_WorkingDir = env.Dir('.'))
     #env.Replace(Mkdocs_ServeUrl = '127.0.0.1:8001')
     #env.Replace(Mkdocs_Strict = True)
-    env.Replace(Mkdocs_ThemeDir = Dir('theme'))
+    #env.Replace(Mkdocs_ThemeDir = Dir('theme'))
     #env.Replace(Mkdocs_DirtyReload = True)
     #env.Replace(Mkdocs_SiteDir = 'site2')
     #env.Replace(Mkdocs_ExtraArgs = ['--verbose'])

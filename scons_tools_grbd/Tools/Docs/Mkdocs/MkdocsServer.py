@@ -8,36 +8,42 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
 
+def _detect(env):
+    if 'Mkdocs' in env:
+        return env['Mkdocs']
+    return env.Detect("mkdocs")
 
 def exists(env):
-    """Make sure mkdocs exists"""
-    return env.Detect("mkdocs")
+    return _detect(env)
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
-    # Default is '127.0.0.1:8000'
-    env.SetDefault(Mkdocs_ServeUrl = None)
-    # If to enable Strict mode
-    env.SetDefault(Mkdocs_Strict = False)
-    # Which theme to use
-    env.SetDefault(Mkdocs_Theme = None)
-    # Directory of additional files to merge in with the theme
-    env.SetDefault(Mkdocs_ThemeDir = None)
-    # If to use livereload, enabled by default
-    # when pages change on the file system the browser auto refreshes to show the changes
-    env.SetDefault(Mkdocs_LiveReload = None)
-    # Enable the live reloading in the development server
-    # but only re-build files that have changed
-    env.SetDefault(Mkdocs_DirtyReload = False)
-    # If to silence warnings
-    env.SetDefault(Mkdocs_Quiet = False)
-    # Show verbose messages
-    env.SetDefault(Mkdocs_Verbose = False)
-    # Additional Arguments
-    env.SetDefault(Mkdocs_ExtraArgs = [])
+    env.SetDefault(
+        # Working directory is current directory (default)
+        Mkdocs_WorkingDir = env.Dir('.'),
+        # Default is '127.0.0.1:8000'
+        Mkdocs_ServeUrl = None,
+        # If to enable Strict mode
+        Mkdocs_Strict = False,
+        # Which theme to use
+        Mkdocs_Theme = None,
+        # Directory of additional files to merge in with the theme
+        Mkdocs_ThemeDir = None,
+        # If to use livereload, enabled by default
+        # when pages change on the file system the browser auto refreshes to show the changes
+        Mkdocs_LiveReload = None,
+        # Enable the live reloading in the development server
+        # but only re-build files that have changed
+        Mkdocs_DirtyReload = False,
+        # If to silence warnings
+        Mkdocs_Quiet = False,
+        # Show verbose messages
+        Mkdocs_Verbose = False,
+        # Additional Arguments
+        Mkdocs_ExtraArgs = [],
+        )
 
     # Register the builder
     bld = Builder(action = __MkdocsServer_func)
@@ -59,7 +65,7 @@ def __MkdocsServer_func(target, source, env):
     if len(source) > 0:
         cfgfile = str(source[0])
 
-    cmdopts = ['mkdocs', 'serve']
+    cmdopts = [_detect(env), 'serve']
 
     if cfgfile:
         cmdopts.append('--config-file=' + cfgfile)

@@ -9,31 +9,38 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
 
-def exists(env):
-    """Make sure mkdocs exists"""
+def _detect(env):
+    if 'Mkdocs' in env:
+        return env['Mkdocs']
     return env.Detect("mkdocs")
+
+def exists(env):
+    return _detect(env)
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    env.SetDefault(Mkdocs_WorkingDir = env.Dir('.'))
     # Available Options - These override those within the yaml configuration file
-    # If to Remove old files from the site_dir before building (the default).
-    env.SetDefault(Mkdocs_CleanBuild = None)
-    # If to enable Strict mode
-    env.SetDefault(Mkdocs_Strict = False)
-    # Which theme to use
-    env.SetDefault(Mkdocs_Theme = None)
-    # Directory of additional files to merge in with the theme
-    env.SetDefault(Mkdocs_ThemeDir = None)
-    # Directory to output the build to - default is 'site'
-    env.SetDefault(Mkdocs_SiteDir = None)
-    # If to silence warnings
-    env.SetDefault(Mkdocs_Quiet = False)
-    # Show verbose messages
-    env.SetDefault(Mkdocs_Verbose = False)
-    # Additional Arguments
-    env.SetDefault(Mkdocs_ExtraArgs = [])
+    env.SetDefault(
+        # Working directory is current directory (default)
+        Mkdocs_WorkingDir = env.Dir('.'),
+        # If to Remove old files from the site_dir before building (the default).
+        Mkdocs_CleanBuild = None,
+        # If to enable Strict mode
+        Mkdocs_Strict = False,
+        # Which theme to use
+        Mkdocs_Theme = None,
+        # Directory of additional files to merge in with the theme
+        Mkdocs_ThemeDir = None,
+        # Directory to output the build to - default is 'site'
+        Mkdocs_SiteDir = None,
+        # If to silence warnings
+        Mkdocs_Quiet = False,
+        # Show verbose messages
+        Mkdocs_Verbose = False,
+        # Additional Arguments
+        Mkdocs_ExtraArgs = [],
+        )
 
     # Register the builder
     bld = Builder(action = __MkdocsBuild_func, emitter = __MkdocsBuild_modify_targets)
@@ -63,7 +70,7 @@ def __MkdocsBuild_modify_targets(target, source, env):
 
 def __MkdocsBuild_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
-    cmdopts = ['mkdocs', 'build']
+    cmdopts = [_detect(env), 'build']
 
     for srcitem in source:
         cfgfile = str(srcitem)

@@ -34,6 +34,7 @@ env.Replace(Mkdocs_CleanBuild = True)
 
 | env setting | Values | Description |
 |-------------|--------|-------------|
+| Mkdocs | 'mkdocs' | Override the executable / path to use |
 | Mkdocs_WorkingDir | Current Directory | Can be set to override the working directory where mkdocs will be run |
 | Mkdocs_CleanBuild | None (default), True, False | If to clean the build directory during the build (default is yes) |
 | Mkdocs_RemoteBranch | None (default) | Override the remote branch name to use when pushing to github |

@@ -13,6 +13,7 @@ pages:
         - MkdocsBuild : Builders\Mkdocs\MkdocsBuild.md
         - MkdocsPublish : Builders\Mkdocs\MkdocsPublish.md
         - MkdocsJsonBuild : Builders\Mkdocs\MkdocsJsonBuild.md
+        - Mkdocs2Pandoc : Builders\Mkdocs\Mkdocs2Pandoc.md
 
 #theme: cosmo
 theme: cyborg

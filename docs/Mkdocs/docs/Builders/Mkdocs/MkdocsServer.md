@@ -44,6 +44,7 @@ env.Replace(Mkdocs_Strict = True)
 
 | env setting | Values | Description |
 |-------------|--------|-------------|
+| Mkdocs | 'mkdocs' | Override the executable / path to use |
 | Mkdocs_WorkingDir | Current Directory | Can be set to override the working directory where mkdocs will be run |
 | Mkdocs_ServeUrl | None, '127.0.0.1:8000' (default) | The server URL to use when hosting the page |
 | Mkdocs_Strict | False (default), True | If to use mkdocs in strict mode |

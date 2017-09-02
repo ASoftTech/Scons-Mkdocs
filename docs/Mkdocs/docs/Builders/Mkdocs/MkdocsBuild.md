@@ -32,6 +32,7 @@ env.Replace(Mkdocs_Strict = True)
 
 | env setting | Values | Description |
 |-------------|--------|-------------|
+| Mkdocs | 'mkdocs' | Override the executable / path to use |
 | Mkdocs_WorkingDir | Current Directory | Can be set to override the working directory where mkdocs will be run |
 | Mkdocs_CleanBuild | None (default), True, False | If to clean the build directory during the build (default is yes) |
 | Mkdocs_Strict | False (default), True | If to use mkdocs in strict mode |

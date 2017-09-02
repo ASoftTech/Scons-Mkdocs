@@ -50,14 +50,8 @@
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py">
-      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsDoxyTemplate.py</Link>
-    </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
-    </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPdf.py">
-      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPdf.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPublish.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsPublish.py</Link>
