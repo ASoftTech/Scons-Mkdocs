@@ -50,10 +50,9 @@ def main():
         tgt = env.MkdocsJsonBuild()
         Default(tgt)
 
-    # TODO issue with mkdocs2pandoc and tables
-    elif cmd == 'mkpandoc':
+    elif cmd == 'mkcombine':
         manual_clean(env)
-        tgt = env.Mkdocs2Pandoc()
+        tgt = env.MkdocsCombiner()
         Default(tgt)
 
 
@@ -100,7 +99,7 @@ def print_useage(env):
 
     print ("Alternative Formats:")
     print ("  json          to build the documentation as JSON files")
-    print ("  mkpandoc      to build the documentation as a Pandoc markdown file")
+    print ("  mkcombine     to build the documentation as a combined markdown file")
 
     # TODO
     print ("  pdf           to build the documentation as a pdf")

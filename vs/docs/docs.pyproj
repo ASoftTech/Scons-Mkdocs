@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -44,11 +44,11 @@
     <Compile Include="..\..\docs\Mkdocs\SConstruct.py">
       <Link>SConstruct.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\Mkdocs2Pandoc.py">
-      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\Mkdocs2Pandoc.py</Link>
-    </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCombiner.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCombiner.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>

@@ -1,7 +1,12 @@
 """
-Mkdocs2Pandoc
-  This tool uses mkdocs2pandoc to generate a pd pandoc file which can then be used with pandoc to generate a pdf or other forms of documentation
+MkdocsCombiner
+  This tool uses mkdocscombiner to generate a pd file which can then be used with pandoc to generate a pdf or other forms of documentation
 """
+
+# TODO
+# 1. rename options from Pandoc to Combine
+# 2. Add additional options
+# 3. Update options in the docs
 
 import os, sys, os.path as path
 import SCons.Script
@@ -10,9 +15,9 @@ from SCons.Script import *
 
 
 def _detect(env):
-    if 'Mkdocs2pandoc' in env:
-        return env['Mkdocs2pandoc']
-    return env.Detect("mkdocs2pandoc")
+    if 'MkdocsCombiner' in env:
+        return env['MkdocsCombiner']
+    return env.Detect("mkdocscombine")
 
 def exists(env):
     return _detect(env)
@@ -38,21 +43,21 @@ def generate(env):
         )
 
     # Register the builder
-    bld = Builder(action = __Mkdocs2Pandoc_func)
-    env.Append(BUILDERS = {'__Mkdocs2Pandoc' : bld})
-    env.AddMethod(Mkdocs2Pandoc, 'Mkdocs2Pandoc')
+    bld = Builder(action = __MkdocsCombiner_func)
+    env.Append(BUILDERS = {'__MkdocsCombiner' : bld})
+    env.AddMethod(MkdocsCombiner, 'MkdocsCombiner')
 
 
-def Mkdocs2Pandoc(env, target = None, source = None):
+def MkdocsCombiner(env, target = None, source = None):
     """Wrapper for the Builder so that we can use a default on the source parameter"""
     if not source:
         source = File('mkdocs.yml')
     if not target:
         target = File('docs/site.pd')
-    return env.__Mkdocs2Pandoc(target, source)
+    return env.__MkdocsCombiner(target, source)
 
 
-def __Mkdocs2Pandoc_func(target, source, env):
+def __MkdocsCombiner_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
     cmdopts = [_detect(env)]
 
