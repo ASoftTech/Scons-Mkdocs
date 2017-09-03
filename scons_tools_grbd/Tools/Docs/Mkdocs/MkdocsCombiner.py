@@ -47,16 +47,16 @@ def generate(env):
         # Table options
 
         # True = keep original Markdown tables (default), False = combine Markdown tables to Pandoc-style grid tables
-        Mkdocs_Combine_PandocTables = None
+        Mkdocs_Combine_PandocTables = None,
         # Width of generated grid tables in characters (default: 100)
         Mkdocs_Combine_TableWidth = None,
 
         # Link options
 
         # True = keep MkDocs-style cross-references, False = replace MkDocs-style cross-references by just their title (default)
-        Mkdocs_Combine_Refs = None
+        Mkdocs_Combine_Refs = None,
         # True = keep HTML anchor tags, False = strip out HTML anchor tags (default)
-        Mkdocs_Combine_Anchors = None
+        Mkdocs_Combine_Anchors = None,
 
         # Extra options
 
@@ -79,7 +79,7 @@ def MkdocsCombiner(env, target = None, source = None):
     if not source:
         source = File('mkdocs.yml')
     if not target:
-        target = File('docs/site.pd')
+        target = File('site/mkdocs.pd')
     return env.__MkdocsCombiner(target, source)
 
 
@@ -133,7 +133,7 @@ def __MkdocsCombiner_func(target, source, env):
         elif env['Mkdocs_Combine_PandocTables'] == False:
             cmdopts.append('--tables')
 
-       if env['Mkdocs_Combine_TableWidth']:
+        if env['Mkdocs_Combine_TableWidth']:
             cmdopts.append('--grid-width=' + str(env['Mkdocs_Combine_TableWidth']))
 
         # Link options

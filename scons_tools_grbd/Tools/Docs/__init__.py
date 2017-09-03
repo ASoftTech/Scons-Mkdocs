@@ -7,7 +7,9 @@ from . import Mkdocs
 
 def generate(env):
     Mkdocs.generate(env)
+    Pandoc.generate(env)
 
 def exists(env):
     if (Mkdocs.exists(env) == False): return False
+    if (Pandoc.exists(env) == False): return False
     return True

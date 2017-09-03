@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -65,6 +65,12 @@
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py</Link>
     </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Pandoc\PandocBuild.py">
+      <Link>scons_tools_grbd\Tools\Docs\Pandoc\PandocBuild.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Pandoc\__init__.py">
+      <Link>scons_tools_grbd\Tools\Docs\Pandoc\__init__.py</Link>
+    </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\__init__.py">
       <Link>scons_tools_grbd\Tools\Docs\__init__.py</Link>
     </Compile>
@@ -81,6 +87,7 @@
     <Folder Include="scons_tools_grbd\Tools\" />
     <Folder Include="scons_tools_grbd\Tools\Docs\" />
     <Folder Include="scons_tools_grbd\Tools\Docs\Mkdocs\" />
+    <Folder Include="scons_tools_grbd\Tools\Docs\Pandoc\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
