@@ -16,7 +16,7 @@ sys.path.append(dir_path)
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+    env = Environment(ENV = os.environ, tools = ['default', 'Docs.Mkdocs', 'MSBuild'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
     # Use the first parameter as the mode to run as
@@ -59,28 +59,15 @@ def main():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # TODO
 
 
     elif cmd == 'pdf':
         manual_clean(env)
-        pdtarget = env.MkdocsPandoc()
-        Default(pdtarget)
+        markdown_target = env.MkdocsCombiner()
+        pd_target = env.Pandoc('docs/export/site.pdf', markdown_target)
+        Default(pd_target)
 
-        print ("TODO pdf")
 
     elif cmd == 'doxygen':
         print ("TODO doxygen_templates")

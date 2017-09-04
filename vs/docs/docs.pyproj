@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -14,7 +14,7 @@
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>serve</CommandLineArguments>
+    <CommandLineArguments>test1</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -43,6 +43,12 @@
   <ItemGroup>
     <Compile Include="..\..\docs\Mkdocs\SConstruct.py">
       <Link>SConstruct.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Doxygen\Doxygen.py">
+      <Link>scons_tools_grbd\Tools\Docs\Doxygen\Doxygen.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Doxygen\__init__.py">
+      <Link>scons_tools_grbd\Tools\Docs\Doxygen\__init__.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsBuild.py</Link>
@@ -74,6 +80,21 @@
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\__init__.py">
       <Link>scons_tools_grbd\Tools\Docs\__init__.py</Link>
     </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\Util\Dll2Lib.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\VC\Util\Dll2Lib.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\Util\__init__.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\VC\Util\__init__.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\__init__.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\VC\__init__.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\__init__.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\__init__.py</Link>
+    </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\__init__.py">
       <Link>scons_tools_grbd\Tools\__init__.py</Link>
     </Compile>
@@ -87,7 +108,12 @@
     <Folder Include="scons_tools_grbd\Tools\" />
     <Folder Include="scons_tools_grbd\Tools\Docs\" />
     <Folder Include="scons_tools_grbd\Tools\Docs\Mkdocs\" />
+    <Folder Include="scons_tools_grbd\Tools\Docs\Doxygen\" />
     <Folder Include="scons_tools_grbd\Tools\Docs\Pandoc\" />
+    <Folder Include="scons_tools_grbd\Tools\MSBuild\" />
+    <Folder Include="scons_tools_grbd\Tools\MSBuild\DotNetCore\" />
+    <Folder Include="scons_tools_grbd\Tools\MSBuild\VC\" />
+    <Folder Include="scons_tools_grbd\Tools\MSBuild\VC\Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
