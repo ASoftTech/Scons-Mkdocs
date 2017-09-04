@@ -14,6 +14,9 @@ pages:
         - MkdocsPublish : Builders\Mkdocs\MkdocsPublish.md
         - MkdocsJsonBuild : Builders\Mkdocs\MkdocsJsonBuild.md
         - MkdocsCombiner : Builders\Mkdocs\MkdocsCombiner.md
+    - MSBuild:
+        - VC:
+            - DLL2Lib: Builders\MSBuild\VC\Dll2Lib.md
 
 #theme: cosmo
 theme: cyborg
