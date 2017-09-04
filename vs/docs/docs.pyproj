@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -83,11 +83,8 @@
     <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py">
       <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py</Link>
     </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\Util\Dll2Lib.py">
-      <Link>scons_tools_grbd\Tools\MSBuild\VC\Util\Dll2Lib.py</Link>
-    </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\Util\__init__.py">
-      <Link>scons_tools_grbd\Tools\MSBuild\VC\Util\__init__.py</Link>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\Dll2Lib.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\VC\Dll2Lib.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\VC\__init__.py">
       <Link>scons_tools_grbd\Tools\MSBuild\VC\__init__.py</Link>
@@ -113,7 +110,6 @@
     <Folder Include="scons_tools_grbd\Tools\MSBuild\" />
     <Folder Include="scons_tools_grbd\Tools\MSBuild\DotNetCore\" />
     <Folder Include="scons_tools_grbd\Tools\MSBuild\VC\" />
-    <Folder Include="scons_tools_grbd\Tools\MSBuild\VC\Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

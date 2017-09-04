@@ -58,6 +58,14 @@ def main():
 
 
 
+    elif cmd == 'test1':
+        tgt = env.Dll2Lib('D:\\Temp\\19\\test1.lib', 'D:\\Temp\\19\\CoreUIComponents.dll')
+        Default(tgt)
+
+
+
+
+
 
     # TODO
 

@@ -72,7 +72,8 @@ def __dumpbin_run_exports(env, dllfile):
     """Run dumpbin /exports against the input dll"""
     cmdopts = [env['DUMPBIN'], '/exports', str(dllfile)]
     print("Calling '%s'" % env['DUMPBIN'])
-    return __runcmd_mbcs(env, cmdopts)
+    stdout, stderr = __runcmd_mbcs(env, cmdopts)
+    return stdout
 
 
 def __dumpbin_parse_exports(input):
@@ -97,7 +98,8 @@ def __write_deffile(outfile, lines):
 def __generate_lib(env, deffile, libfile):
     """Generate the .lib file"""
     cmdopts = [env['AR'], '/def:' + deffile, '/OUT:' + libfile]
-    return __runcmd_mbcs(env, cmdopts)
+    stdout, stderr = __runcmd_mbcs(env, cmdopts)
+    return stdout
 
 
 def __runcmd_mbcs(env, cmdopts):
@@ -106,12 +108,15 @@ def __runcmd_mbcs(env, cmdopts):
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout = popen.stdout.read()
     stderr = popen.stderr.read()
+
+    if not isinstance(stderr, str):
+        stderr = stderr.decode("mbcs")
+    if not isinstance(stdout, str):
+        stdout = stdout.decode("mbcs")
+
     if stderr:
         import sys
         sys.stderr.write(stderr)
     if popen.wait() != 0:
-        if not isinstance(stderr, str):
-            stderr = stderr.decode("mbcs")
         raise IOError(stderr)
-    output = stdout.decode("mbcs")
-    return output
+    return stdout, stderr

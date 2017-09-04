@@ -3,11 +3,11 @@ If the user requests "MSBuild.VC" then this will call this script as a tool
 In which case we include all the related builders
 """
 
-from . import Util
+from . import Dll2Lib
 
 def generate(env):
-    Util.generate(env)
+    Dll2Lib.generate(env)
 
 def exists(env):
-    if (Util.exists(env) == False): return False
+    if (Dll2Lib.exists(env) == False): return False
     return True
