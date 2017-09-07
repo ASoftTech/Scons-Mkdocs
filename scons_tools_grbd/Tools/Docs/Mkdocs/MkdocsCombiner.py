@@ -22,20 +22,8 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     MkdocsCommon.setup_opts_combiner(env)
-    bld = Builder(action = __MkdocsCombiner_func, emitter = __MkdocsCombiner_emitter)
+    bld = Builder(action = __MkdocsCombiner_func, emitter = MkdocsCommon.MkdocsCombiner_emitter)
     env.Append(BUILDERS = {'MkdocsCombiner' : bld})
-
-
-def __MkdocsCombiner_emitter(target, source, env):
-    # Choose mkdocs.yml as source file if not specified
-    if not source:
-        source.append(File('mkdocs.yml'))
-    # Add in the contents of the docs directory
-    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
-    # Default target
-    if not target:
-        target = File('site/mkdocs.pd')
-    return target, source
 
 
 def __MkdocsCombiner_func(target, source, env):

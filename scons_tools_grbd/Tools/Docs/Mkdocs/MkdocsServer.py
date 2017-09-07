@@ -8,6 +8,8 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
 
+# TODO always rebuild option needed?
+
 # TODO fix relative imports when importing a single namespaced tool
 from scons_tools_grbd.Tools.Docs.Mkdocs import MkdocsCommon
 
@@ -21,20 +23,8 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     MkdocsCommon.setup_opts(env)
-    bld = Builder(action = __MkdocsServer_func, emitter = __MkdocsServerBuild_emitter)
+    bld = Builder(action = __MkdocsServer_func, emitter = MkdocsCommon.Mkdocs_emitter)
     env.Append(BUILDERS = {'MkdocsServer' : bld})
-
-
-def __MkdocsServerBuild_emitter(target, source, env):
-    # TODO read / parse mkdocs.yml
-    # change in source not triggering rebuild?
-
-    # Choose mkdocs.yml as source file if not specified
-    if not source:
-        source.append(File('mkdocs.yml'))
-    # Add in the contents of the docs directory
-    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
-    return target, source
 
 
 def __MkdocsServer_func(target, source, env):

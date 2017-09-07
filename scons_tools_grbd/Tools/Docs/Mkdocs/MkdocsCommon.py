@@ -137,3 +137,38 @@ def MkdocsScanner(node, env):
         for f in files:
             depends.append(File(path.join(d, f)))
     return depends
+
+
+def Mkdocs_emitter(target, source, env):
+    # TODO read / parse mkdocs.yml
+
+    # Choose mkdocs.yml as source file if not specified
+    if not source:
+        source.append(File('mkdocs.yml'))
+    # Add in the contents of the docs directory
+    source = source + MkdocsScanner(Dir('docs'), env)
+
+    # Determine site dir
+    if env['Mkdocs_SiteDir']:
+        sitedirnode = Dir(env['Mkdocs_SiteDir'])
+    else:
+        sitedirnode = Dir('site')
+    # We need at least one target that's a file for the rebuild if source changes logic to work
+    filenode = File(path.join(sitedirnode.abspath, 'mkdocs/search_index.json'))
+    target.append(filenode)
+    env.Clean(target, sitedirnode)
+    return target, source
+
+
+def MkdocsCombiner_emitter(target, source, env):
+    # TODO read / parse mkdocs.yml
+
+    # Choose mkdocs.yml as source file if not specified
+    if not source:
+        source.append(File('mkdocs.yml'))
+    # Add in the contents of the docs directory
+    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
+    # Default target
+    if not target:
+        target = File('site/mkdocs.pd')
+    return target, source

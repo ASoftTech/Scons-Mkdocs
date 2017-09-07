@@ -24,7 +24,7 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     MkdocsCommon.setup_opts(env)
-    bld = Builder(action = __MkdocsPublish_func, emitter = __MkdocsPublish_modify_targets)
+    bld = Builder(action = __MkdocsPublish_func, emitter = MkdocsCommon.Mkdocs_emitter)
     env.Append(BUILDERS = {'__MkdocsPublish' : bld})
     env.AddMethod(MkdocsPublish, 'MkdocsPublish')
 
@@ -32,26 +32,6 @@ def generate(env):
 def MkdocsPublish(env, commitmsg, target = None, source = None):
     """Wrapper for the Builder so that we can use a default on the source parameter"""
     return env.__MkdocsPublish(target, source, Mkdocs_CommitMsg=commitmsg)
-
-
-def __MkdocsPublish_modify_targets(target, source, env):
-    # TODO read / parse mkdocs.yml
-    # change in source not triggering rebuild?
-
-    # Choose mkdocs.yml as source file if not specified
-    if not source:
-        source.append(File('mkdocs.yml'))
-    # Add in the contents of the docs directory
-    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
-
-    # Change target to site directory
-    if env['Mkdocs_SiteDir']:
-        dirnode = Dir(env['Mkdocs_SiteDir'])
-    else:
-        dirnode = Dir('site')
-    target.append(dirnode)
-    env.Clean(target, dirnode)
-    return target, source
 
 
 def __MkdocsPublish_func(target, source, env):

@@ -22,28 +22,8 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     MkdocsCommon.setup_opts(env)
-    bld = Builder(action = __MkdocsBuild_func, emitter = __MkdocsBuild_emitter)
+    bld = Builder(action = __MkdocsBuild_func, emitter = MkdocsCommon.Mkdocs_emitter)
     env.Append(BUILDERS = {'MkdocsBuild' : bld})
-
-
-def __MkdocsBuild_emitter(target, source, env):
-    # TODO read / parse mkdocs.yml
-    # change in source not triggering rebuild?
-
-    # Choose mkdocs.yml as source file if not specified
-    if not source:
-        source.append(File('mkdocs.yml'))
-    # Add in the contents of the docs directory
-    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
-
-    # Change target to site directory
-    if env['Mkdocs_SiteDir']:
-        dirnode = Dir(env['Mkdocs_SiteDir'])
-    else:
-        dirnode = Dir('site')
-    target.append(dirnode)
-    env.Clean(target, dirnode)
-    return target, source
 
 
 def __MkdocsBuild_func(target, source, env):
