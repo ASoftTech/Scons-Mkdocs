@@ -27,8 +27,12 @@ def generate(env):
 
 
 def __MkdocsCombiner_emitter(target, source, env):
+    # Choose mkdocs.yml as source file if not specified
     if not source:
-        source = File('mkdocs.yml')
+        source.append(File('mkdocs.yml'))
+    # Add in the contents of the docs directory
+    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
+    # Default target
     if not target:
         target = File('site/mkdocs.pd')
     return target, source

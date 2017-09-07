@@ -3,6 +3,10 @@ MkdocsCommon
   Common code associated with mkdocs builders
 """
 
+import os, sys, os.path as path
+import SCons.Script
+from SCons.Environment import Environment
+from SCons.Script import *
 
 def detect(env):
     """Detect if mkdocs exe is detected on the system, or use user specified option"""
@@ -116,25 +120,20 @@ def setup_opts_combiner(env):
         )
 
 
-
-# TODO ignore doxygen dir
-
-def MkdocsScanner(node, env, path, arg):
+def MkdocsScanner(node, env):
     """Dependency scanner for listing all files within the mkdocs source directory (typically docs)
     Args:
-        node: the SCons node to scan
+        node: the SCons directory node to scan
         env:  the current SCons environment
-        path: unused
     Returns:
         A list of files.
     """
-    path = env.subst(node.abspath)
+    searchpath = env.subst(node.abspath)
+    doxygen_path = path.join(searchpath, 'doxygen')
     depends = []
-    for d, unused_s, files in os.walk(path, topdown=True):
+    for d, unused_s, files in os.walk(searchpath, topdown=True):
+        if d.startswith(doxygen_path):
+            continue
         for f in files:
-            depends.append(os.path.join(d, f))
-    print (depends)
-
-    # TODO need to be all File node objects
-
+            depends.append(File(path.join(d, f)))
     return depends

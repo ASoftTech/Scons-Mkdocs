@@ -31,7 +31,7 @@ def main():
         Default(tgt)
 
     elif cmd == 'build':
-        manual_clean(env)
+        #manual_clean(env)
         tgt = env.MkdocsBuild()
         Default(tgt)
 

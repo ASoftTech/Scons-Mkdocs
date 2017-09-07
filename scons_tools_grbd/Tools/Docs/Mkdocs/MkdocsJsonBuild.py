@@ -28,15 +28,15 @@ def generate(env):
 
 def __MkdocsJsonBuild_emitter(target, source, env):
     # TODO read / parse mkdocs.yml
-    # TODO add source files in docs via scanner
-    #test1 = DirScanner(Dir('docs'), env, None)
+    # change in source not triggering rebuild?
 
     # Choose mkdocs.yml as source file if not specified
     if not source:
         source.append(File('mkdocs.yml'))
+    # Add in the contents of the docs directory
+    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
 
     # Change target to site directory
-    del target[:]
     if env['Mkdocs_SiteDir']:
         dirnode = Dir(env['Mkdocs_SiteDir'])
     else:
