@@ -4,6 +4,14 @@
 
   * Test cleanup in all instances
   * write more tests
+  * look at https://bitbucket.org/scons/scons/wiki/ToolsIndex
+  * look at https://bitbucket.org/scons/scons/wiki/ContributedBuilders
+
+  * Once scons moves to github file a new issue
+    a tool requires an exists function, it's searched for but never actually called.
+    so we end up having to call it from within the generate function.
+    Based on some of the mails from a couple of years ago there's plans to change the tool mechansim.
+  * Take another look at relative imports within the tool loader
 
 ## Entry Points
 

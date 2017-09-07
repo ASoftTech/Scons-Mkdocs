@@ -11,52 +11,39 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
 
-def _detect(env):
-    if 'Mkdocs' in env:
-        return env['Mkdocs']
-    return env.Detect("mkdocs")
+# TODO fix relative imports when importing a single namespaced tool
+from scons_tools_grbd.Tools.Docs.Mkdocs import MkdocsCommon
+
 
 def exists(env):
-    return _detect(env)
+    """Check if we're okay to load this builder"""
+    return MkdocsCommon.detect(env)
+
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    # Available Options - These override those within the yaml configuration file
-    env.SetDefault(
-        # Working directory is current directory (default)
-        Mkdocs_WorkingDir = env.Dir('.'),
-        # If to Remove old files from the site_dir before building (the default).
-        Mkdocs_CleanBuild = None,
-        # If to override the default remote branch setting when uploading
-        Mkdocs_RemoteBranch = None,
-        # If to override the default remote name setting when uploading
-        Mkdocs_RemoteName = None,
-        # If to force the push to github
-        Mkdocs_ForcePush = False,
-        # If to silence warnings
-        Mkdocs_Quiet = False,
-        # Show verbose messages
-        Mkdocs_Verbose = False,
-        # Additional Arguments
-        Mkdocs_ExtraArgs = [],
-        )
-
-    # Register the builder
+    MkdocsCommon.setup_opts(env)
     bld = Builder(action = __MkdocsPublish_func, emitter = __MkdocsPublish_modify_targets)
     env.Append(BUILDERS = {'__MkdocsPublish' : bld})
     env.AddMethod(MkdocsPublish, 'MkdocsPublish')
 
 
-def MkdocsPublish(env, commitmsg, source = None):
+def MkdocsPublish(env, commitmsg, target = None, source = None):
     """Wrapper for the Builder so that we can use a default on the source parameter"""
-    if source:
-        return env.__MkdocsPublish(None, source, Mkdocs_CommitMsg=commitmsg)
-    else:
-        return env.__MkdocsPublish(None, 'mkdocs.yml', Mkdocs_CommitMsg=commitmsg)
+    return env.__MkdocsPublish(target, source, Mkdocs_CommitMsg=commitmsg)
 
 
 def __MkdocsPublish_modify_targets(target, source, env):
+    # TODO read / parse mkdocs.yml
+    # TODO add source files in docs via scanner
+    #test1 = DirScanner(Dir('docs'), env, None)
+
+    # Choose mkdocs.yml as source file if not specified
+    if not source:
+        source.append(File('mkdocs.yml'))
+
+    # Change target to site directory
     del target[:]
     if env['Mkdocs_SiteDir']:
         dirnode = Dir(env['Mkdocs_SiteDir'])
@@ -70,40 +57,26 @@ def __MkdocsPublish_modify_targets(target, source, env):
 
 def __MkdocsPublish_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
-    cmdopts = [_detect(env), 'gh-deploy']
+    cmdopts = ['$Mkdocs', 'gh-deploy']
+    cmdopts.append('--config-file=' + str(source[0]))
+    if env['Mkdocs_CleanBuild'] == True:
+        cmdopts.append('--clean')
+    elif env['Mkdocs_CleanBuild'] == False:
+        cmdopts.append('--dirty')
+    if not env['Mkdocs_CommitMsg']:
+        raise Exception('No commit message specified')
+    cmdopts.append('--message=$Mkdocs_CommitMsg')
+    if env['Mkdocs_RemoteBranch']:
+        cmdopts.append('--remote-branch=$Mkdocs_RemoteBranch')
+    if env['Mkdocs_RemoteName']:
+        cmdopts.append('--remote-name=$Mkdocs_RemoteName')
+    if env['Mkdocs_ForcePush']:
+        cmdopts.append('--force')
+    if env['Mkdocs_Quiet']:
+        cmdopts.append('--quiet')
+    if env['Mkdocs_Verbose']:
+        cmdopts.append('--verbose')
+    cmdopts = cmdopts + env['Mkdocs_ExtraArgs']
 
-    for srcitem in source:
-        cfgfile = str(srcitem)
-
-        if cfgfile:
-            cmdopts.append('--config-file=' + cfgfile)
-
-        if env['Mkdocs_CleanBuild'] == True:
-            cmdopts.append('--clean')
-        elif env['Mkdocs_CleanBuild'] == False:
-            cmdopts.append('--dirty')
-
-        if not env['Mkdocs_CommitMsg']:
-            raise Exception('No commit message specified')
-        cmdopts.append('--message=' + str(env['Mkdocs_CommitMsg']))
-
-        if env['Mkdocs_RemoteBranch']:
-            cmdopts.append('--remote-branch=' + str(env['Mkdocs_RemoteBranch']))
-
-        if env['Mkdocs_RemoteName']:
-            cmdopts.append('--remote-name=' + str(env['Mkdocs_RemoteName']))
-            
-        if env['Mkdocs_ForcePush']:
-            cmdopts.append('--force')
-
-        if env['Mkdocs_Quiet']:
-            cmdopts.append('--quiet')
-
-        if env['Mkdocs_Verbose']:
-            cmdopts.append('--verbose')
-
-        cmdopts = cmdopts + env['Mkdocs_ExtraArgs']
-
-        print('Pushing MkDocs Documentation:')
-        env.Execute(env.Action([cmdopts], chdir=env['Mkdocs_WorkingDir']))
-
+    print('Pushing MkDocs Documentation:')
+    env.Execute(env.Action([cmdopts], chdir=env['Mkdocs_WorkingDir']))

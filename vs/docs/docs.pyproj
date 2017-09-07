@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -14,7 +14,7 @@
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>test1</CommandLineArguments>
+    <CommandLineArguments>build</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -56,6 +56,9 @@
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCombiner.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCombiner.py</Link>
     </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCommon.py">
+      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsCommon.py</Link>
+    </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
     </Compile>
@@ -64,9 +67,6 @@
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsServer.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\MkdocsServer.py</Link>
-    </Compile>
-    <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\x_build.py">
-      <Link>scons_tools_grbd\Tools\Docs\Mkdocs\x_build.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py">
       <Link>scons_tools_grbd\Tools\Docs\Mkdocs\__init__.py</Link>
@@ -79,6 +79,9 @@
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\Docs\__init__.py">
       <Link>scons_tools_grbd\Tools\Docs\__init__.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreBuild.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreBuild.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py">
       <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py</Link>

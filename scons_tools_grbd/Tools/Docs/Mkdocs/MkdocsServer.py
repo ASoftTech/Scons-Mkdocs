@@ -8,96 +8,58 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
 
-def _detect(env):
-    if 'Mkdocs' in env:
-        return env['Mkdocs']
-    return env.Detect("mkdocs")
+# TODO fix relative imports when importing a single namespaced tool
+from scons_tools_grbd.Tools.Docs.Mkdocs import MkdocsCommon
+
 
 def exists(env):
-    return _detect(env)
+    """Check if we're okay to load this builder"""
+    return MkdocsCommon.detect(env)
+
 
 def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
-    # Available Options - These override those within the yaml configuration file
-    env.SetDefault(
-        # Working directory is current directory (default)
-        Mkdocs_WorkingDir = env.Dir('.'),
-        # Default is '127.0.0.1:8000'
-        Mkdocs_ServeUrl = None,
-        # If to enable Strict mode
-        Mkdocs_Strict = False,
-        # Which theme to use
-        Mkdocs_Theme = None,
-        # Directory of additional files to merge in with the theme
-        Mkdocs_ThemeDir = None,
-        # If to use livereload, enabled by default
-        # when pages change on the file system the browser auto refreshes to show the changes
-        Mkdocs_LiveReload = None,
-        # Enable the live reloading in the development server
-        # but only re-build files that have changed
-        Mkdocs_DirtyReload = False,
-        # If to silence warnings
-        Mkdocs_Quiet = False,
-        # Show verbose messages
-        Mkdocs_Verbose = False,
-        # Additional Arguments
-        Mkdocs_ExtraArgs = [],
-        )
-
-    # Register the builder
-    bld = Builder(action = __MkdocsServer_func)
-    env.Append(BUILDERS = {'__MkdocsServer' : bld})
-    env.AddMethod(MkdocsServer, 'MkdocsServer')
+    MkdocsCommon.setup_opts(env)
+    bld = Builder(action = __MkdocsServer_func, emitter = __MkdocsServerBuild_emitter)
+    env.Append(BUILDERS = {'MkdocsServer' : bld})
 
 
-def MkdocsServer(env, source = None):
-    """Wrapper for the Builder so that we can use a default on the source parameter"""
-    if source:
-        return env.__MkdocsServer(source)
-    else:
-        return env.__MkdocsServer('mkdocs.yml')
+def __MkdocsServerBuild_emitter(target, source, env):
+    # TODO read / parse mkdocs.yml
+    # TODO add source files in docs via scanner
+    #test1 = DirScanner(Dir('docs'), env, None)
+
+    # Choose mkdocs.yml as source file if not specified
+    if not source:
+        source.append(File('mkdocs.yml'))
+    return target, source
 
 
 def __MkdocsServer_func(target, source, env):
     """Actual builder that does the work after the Sconscript file is parsed"""
-
-    if len(source) > 0:
-        cfgfile = str(source[0])
-
-    cmdopts = [_detect(env), 'serve']
-
-    if cfgfile:
-        cmdopts.append('--config-file=' + cfgfile)
-
+    cmdopts = ['$Mkdocs', 'serve']
+    cmdopts.append('--config-file=' + str(source[0]))
     serverurl = '127.0.0.1:8000'
     if env['Mkdocs_ServeUrl']:
         serverurl = str(env['Mkdocs_ServeUrl'])
-        cmdopts.append('--dev-addr=' + serverurl)
-
+        cmdopts.append('--dev-addr=$Mkdocs_ServeUrl')
     if env['Mkdocs_Strict']:
         cmdopts.append('--strict')
-
     if env['Mkdocs_Theme']:
-        cmdopts.append('--theme=' + str(env['Mkdocs_Theme']))
-
+        cmdopts.append('--theme=$Mkdocs_Theme')
     if env['Mkdocs_ThemeDir']:
-        cmdopts.append('--theme-dir=' + str(env['Mkdocs_ThemeDir']))
-
+        cmdopts.append('--theme-dir=$Mkdocs_ThemeDir')
     if env['Mkdocs_LiveReload'] == True:
         cmdopts.append('--livereload')
     elif env['Mkdocs_LiveReload'] == False:
         cmdopts.append('--no-livereload')
-
     if env['Mkdocs_DirtyReload'] == True:
         cmdopts.append('--dirtyreload')
-
     if env['Mkdocs_Quiet']:
         cmdopts.append('--quiet')
-
     if env['Mkdocs_Verbose']:
         cmdopts.append('--verbose')
-
     cmdopts = cmdopts + env['Mkdocs_ExtraArgs']
 
     print('Starting MkDocs Server http://' + serverurl)
