@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\docs\Mkdocs;..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\;..\..\tools\virtualenv_py3\Scripts;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\scons_tools_grbd\Tools\MSBuild\VC\Util;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd;..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -82,6 +82,9 @@
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreBuild.py">
       <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreBuild.py</Link>
+    </Compile>
+    <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreCommon.py">
+      <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\DotnetCoreCommon.py</Link>
     </Compile>
     <Compile Include="..\..\scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py">
       <Link>scons_tools_grbd\Tools\MSBuild\DotNetCore\__init__.py</Link>

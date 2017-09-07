@@ -6,7 +6,7 @@ This tool can be used to serve / preview the mkdocs output locally before publis
 import os, sys, os.path as path
 import SCons.Script
 from SCons.Environment import Environment
-from SCons.Script import *
+from SCons.Script import Builder
 
 # TODO always rebuild option needed?
 

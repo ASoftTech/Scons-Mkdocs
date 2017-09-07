@@ -55,11 +55,11 @@ def generate(env):
         )
 
     # Register the builder
-    bld = Builder(action = __DotnetCoreBuild_func, emitter = __DotnetCoreBuild_modify_targets)
+    bld = Builder(action = __DotnetCoreBuild_func, emitter = __DotnetCoreBuild_emitter)
     env.Append(BUILDERS = {'DotnetCoreBuild' : bld})
 
 
-def __DotnetCoreBuild_modify_targets(target, source, env):
+def __DotnetCoreBuild_emitter(target, source, env):
     # TODO
     return target, source
 

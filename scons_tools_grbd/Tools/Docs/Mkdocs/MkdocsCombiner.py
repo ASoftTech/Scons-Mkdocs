@@ -6,7 +6,7 @@ MkdocsCombiner
 import os, sys, os.path as path
 import SCons.Script
 from SCons.Environment import Environment
-from SCons.Script import *
+from SCons.Script import Builder
 
 
 # TODO fix relative imports when importing a single namespaced tool

@@ -6,7 +6,7 @@ MkdocsCommon
 import os, sys, os.path as path, yaml
 import SCons.Script
 from SCons.Environment import Environment
-from SCons.Script import *
+from SCons.Script import File, Dir
 
 def detect(env):
     """Detect if mkdocs exe is detected on the system, or use user specified option"""
@@ -120,23 +120,25 @@ def setup_opts_combiner(env):
         )
 
 
-def MkdocsScanner(node, env):
+def MkdocsScanner(node, env, path, arg):
     """Dependency scanner for listing all files within the mkdocs source directory (typically docs)
     We exclude the doxygen dir since it has quite a lot of content and requires a clean build anyway
     Args:
         node: the SCons directory node to scan
         env:  the current SCons environment
+        path: not used
+        arg:  not used
     Returns:
         A list of files.
     """
     searchpath = env.subst(node.abspath)
-    doxygen_path = path.join(searchpath, 'doxygen')
+    doxygen_path = os.path.join(searchpath, 'doxygen')
     depends = []
     for d, unused_s, files in os.walk(searchpath, topdown=True):
         if d.startswith(doxygen_path):
             continue
         for f in files:
-            depends.append(File(path.join(d, f)))
+            depends.append(File(os.path.join(d, f)))
     return depends
 
 
@@ -150,7 +152,7 @@ def Mkdocs_emitter(target, source, env):
     # Read mkdocs config
     yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
     # Add in the contents of the docs source directory
-    source = source + MkdocsScanner(docsdirnode, env)
+    source = source + MkdocsScanner(docsdirnode, env, None, None)
     # We need at least one target that's a file for the rebuild if source changes logic to work
     filenode = File(path.join(str(sitedirnode), 'mkdocs/search_index.json'))
     target.append(filenode)
@@ -168,7 +170,7 @@ def MkdocsCombiner_emitter(target, source, env):
     # Read mkdocs config
     yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
     # Add in the contents of the docs directory
-    source = source + MkdocsScanner(docsdirnode, env)
+    source = source + MkdocsScanner(docsdirnode, env, None, None)
     # Default target
     if not target:
         target = File('site/mkdocs.pd')
