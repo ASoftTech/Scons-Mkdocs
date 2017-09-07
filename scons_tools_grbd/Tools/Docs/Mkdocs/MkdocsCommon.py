@@ -3,7 +3,7 @@ MkdocsCommon
   Common code associated with mkdocs builders
 """
 
-import os, sys, os.path as path
+import os, sys, os.path as path, yaml
 import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import *
@@ -122,6 +122,7 @@ def setup_opts_combiner(env):
 
 def MkdocsScanner(node, env):
     """Dependency scanner for listing all files within the mkdocs source directory (typically docs)
+    We exclude the doxygen dir since it has quite a lot of content and requires a clean build anyway
     Args:
         node: the SCons directory node to scan
         env:  the current SCons environment
@@ -140,35 +141,54 @@ def MkdocsScanner(node, env):
 
 
 def Mkdocs_emitter(target, source, env):
-    # TODO read / parse mkdocs.yml
-
     # Choose mkdocs.yml as source file if not specified
     if not source:
-        source.append(File('mkdocs.yml'))
-    # Add in the contents of the docs directory
-    source = source + MkdocsScanner(Dir('docs'), env)
-
-    # Determine site dir
-    if env['Mkdocs_SiteDir']:
-        sitedirnode = Dir(env['Mkdocs_SiteDir'])
+        cfgfile = File('mkdocs.yml')
+        source.append(cfgfile)
     else:
-        sitedirnode = Dir('site')
+        cfgfile = source[0]
+    # Read mkdocs config
+    yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
+    # Add in the contents of the docs source directory
+    source = source + MkdocsScanner(docsdirnode, env)
     # We need at least one target that's a file for the rebuild if source changes logic to work
-    filenode = File(path.join(sitedirnode.abspath, 'mkdocs/search_index.json'))
+    filenode = File(path.join(str(sitedirnode), 'mkdocs/search_index.json'))
     target.append(filenode)
     env.Clean(target, sitedirnode)
     return target, source
 
 
 def MkdocsCombiner_emitter(target, source, env):
-    # TODO read / parse mkdocs.yml
-
     # Choose mkdocs.yml as source file if not specified
     if not source:
-        source.append(File('mkdocs.yml'))
+        cfgfile = File('mkdocs.yml')
+        source.append(cfgfile)
+    else:
+        cfgfile = source[0]
+    # Read mkdocs config
+    yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
     # Add in the contents of the docs directory
-    source = source + MkdocsCommon.MkdocsScanner(Dir('docs'), env)
+    source = source + MkdocsScanner(docsdirnode, env)
     # Default target
     if not target:
         target = File('site/mkdocs.pd')
     return target, source
+
+
+def Mkdocs_Readconfig(cfgfile, env):
+    """Read the mkdocs yaml configuration file"""
+    with open(str(cfgfile), 'r') as stream:
+        yamlcfg = yaml.load(stream)
+    # Determine destination site dir
+    if env['Mkdocs_SiteDir']:
+        sitedirnode = Dir(env['Mkdocs_SiteDir'])
+    elif 'site_dir' in yamlcfg:
+        sitedirnode = Dir(yamlcfg['site_dir'])
+    else:
+        sitedirnode = Dir('site')
+    # Determind source docs dir
+    if 'docs_dir' in yamlcfg:
+        docsdirnode = Dir(yamlcfg['docs_dir'])
+    else:
+        docsdirnode = Dir('docs')
+    return yamlcfg, sitedirnode, docsdirnode

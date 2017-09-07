@@ -16,7 +16,7 @@ sys.path.append(dir_path)
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs.MkdocsBuild'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
     # Use the first parameter as the mode to run as
@@ -31,12 +31,10 @@ def main():
         Default(tgt)
 
     elif cmd == 'build':
-        #manual_clean(env)
         tgt = env.MkdocsBuild()
         Default(tgt)
 
     elif cmd == 'publish':
-        manual_clean(env)
         tgt = env.MkdocsPublish("Example commit message")
         Default(tgt)
 
@@ -46,12 +44,10 @@ def main():
     # Alternative Formats
 
     elif cmd == 'json':
-        manual_clean(env)
         tgt = env.MkdocsJsonBuild()
         Default(tgt)
 
     elif cmd == 'mkcombine':
-        manual_clean(env)
         tgt = env.MkdocsCombiner()
         Default(tgt)
 

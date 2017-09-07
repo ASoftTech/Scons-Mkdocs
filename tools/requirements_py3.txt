@@ -34,3 +34,4 @@ regex==2017.7.28
 six==1.10.0
 tornado==4.5.1
 Unidecode==0.4.21
+pyaml==17.8.0

@@ -34,11 +34,11 @@ def generate(env):
     )
 
     # Register the builder
-    bld = Builder(action = __Dll2Lib_func, emitter = __Dll2Lib_modify_targets)
+    bld = Builder(action = __Dll2Lib_func, emitter = __Dll2Lib_emitter)
     env.Append(BUILDERS = {'Dll2Lib' : bld})
 
 
-def __Dll2Lib_modify_targets(target, source, env):
+def __Dll2Lib_emitter(target, source, env):
     """Add the generated .def and .exp files to the list of targerts for cleanup"""
     addfiles = []
     for item in target:
