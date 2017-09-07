@@ -68,3 +68,15 @@ A couple of notes
 
   * It looks as if we can't use the -e option when using pip with scons
   * Also we need to build the source before installing with pip, so we can't install directory from source control.
+
+
+## Running tests
+
+Under windows
+
+TODO
+```
+cd D:\SourceControl\GitRepos.Appst\Scons-Tools-Grbd\tools\scons-test
+set PYTHONPATH=%PYTHONPATH%;D:\SourceControl\GitRepos.Appst\Scons-Tools-Grbd
+runtest.py D:\SourceControl\GitRepos.Appst\Scons-Tools-Grbd\scons_tools_grbd\Tests\Docs\Mkdocs\MkdocsBuild.py
+```

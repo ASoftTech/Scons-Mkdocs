@@ -1,16 +1,14 @@
 """
-If the user requests "MSBuild.DotNetCore" then this will call this script as a tool
+If the user requests "MSBuild.DotnetCore" then this will call this script as a tool
 In which case we include all the related builders
 """
 
-#from . import Dll2Lib
+from . import DotnetCoreBuild
 
 def generate(env):
-    # TODO
-    #Dll2Lib.generate(env)
+    DotnetCoreBuild.generate(env)
     pass
 
 def exists(env):
-    # TODO
-    #if (Dll2Lib.exists(env) == False): return False
+    if (DotnetCoreBuild.exists(env) == False): return False
     return True

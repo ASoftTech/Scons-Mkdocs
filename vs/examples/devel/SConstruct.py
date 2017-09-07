@@ -11,6 +11,7 @@ dir_path = os.path.join(dir_path, '../../')
 dir_path = os.path.abspath(dir_path)
 sys.path.append(dir_path)
 
+
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)

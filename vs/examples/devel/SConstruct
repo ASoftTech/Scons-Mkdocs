@@ -1,0 +1,3 @@
+# Works for both Python2 and Python3
+# Allows us to debug the main script in SConstruct.py from within Visual Studio
+exec(compile(open('SConstruct.py').read(), 'SConstruct.py', 'exec'))

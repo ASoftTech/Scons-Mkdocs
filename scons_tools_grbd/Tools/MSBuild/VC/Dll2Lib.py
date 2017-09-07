@@ -13,7 +13,7 @@ Dll2Lib
 import os, sys, os.path as path, subprocess
 import SCons.Script
 from SCons.Environment import Environment
-from SCons.Script import *
+from SCons.Script import Builder
 from SCons.Tool.MSCommon import msvc_exists, msvc_setup_env_once
 
 
