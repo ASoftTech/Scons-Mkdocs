@@ -6,7 +6,7 @@
     <ProjectHome>.</ProjectHome>
     <StartupFile>
     </StartupFile>
-    <SearchPath>..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd</SearchPath>
+    <SearchPath>..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd;..\..\..\..\Scons-Tools-Grbd</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>scons_tools_grbd</Name>
@@ -53,6 +53,12 @@
     <Compile Include="..\..\..\scons_tools_grbd\Tests\Docs\Mkdocs\MkdocsBuild.py">
       <Link>Tests\Docs\Mkdocs\MkdocsBuild.py</Link>
     </Compile>
+    <Compile Include="..\..\..\scons_tools_grbd\Tests\Docs\Mkdocs\MkdocsCombiner.py">
+      <Link>Tests\Docs\Mkdocs\MkdocsCombiner.py</Link>
+    </Compile>
+    <Compile Include="..\..\..\scons_tools_grbd\Tests\Docs\Mkdocs\MkdocsJsonBuild.py">
+      <Link>Tests\Docs\Mkdocs\MkdocsJsonBuild.py</Link>
+    </Compile>
     <Compile Include="..\..\..\scons_tools_grbd\Tests\Docs\Mkdocs\__init__.py">
       <Link>Tests\Docs\Mkdocs\__init__.py</Link>
     </Compile>
@@ -67,6 +73,12 @@
     </Compile>
     <Compile Include="..\..\..\scons_tools_grbd\Tools\Docs\Doxygen\Doxygen.py">
       <Link>Tools\Docs\Doxygen\Doxygen.py</Link>
+    </Compile>
+    <Compile Include="..\..\..\scons_tools_grbd\Tools\Docs\Doxygen\DoxygenCommon.py">
+      <Link>Tools\Docs\Doxygen\DoxygenCommon.py</Link>
+    </Compile>
+    <Compile Include="..\..\..\scons_tools_grbd\Tools\Docs\Doxygen\DoxygenDefaultTemplate.py">
+      <Link>Tools\Docs\Doxygen\DoxygenDefaultTemplate.py</Link>
     </Compile>
     <Compile Include="..\..\..\scons_tools_grbd\Tools\Docs\Doxygen\__init__.py">
       <Link>Tools\Docs\Doxygen\__init__.py</Link>

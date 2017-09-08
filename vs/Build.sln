@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SiteDocs", "SiteDocs", "{EE
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "withoutscons", "examples\withoutscons\withoutscons.pyproj", "{3F2086E5-36B2-460D-A197-F30AA0CE68B9}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "docs", "docs\docs.pyproj", "{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "devel", "examples\devel\devel.pyproj", "{A01560A6-9D95-4ABC-9488-3613D7AC561F}"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "scons_tools_grbd", "examples\scons_tools_grbd\scons_tools_grbd.pyproj", "{53C16D7E-B7A8-4F29-A490-771AD96B5D3F}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Mkdocs", "docs\Mkdocs\Mkdocs.pyproj", "{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Doxygen", "docs\Doxygen\Doxygen.pyproj", "{7F1B98C7-0411-4FA6-B58E-24404400F14A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,21 +25,24 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3F2086E5-36B2-460D-A197-F30AA0CE68B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F2086E5-36B2-460D-A197-F30AA0CE68B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A01560A6-9D95-4ABC-9488-3613D7AC561F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A01560A6-9D95-4ABC-9488-3613D7AC561F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53C16D7E-B7A8-4F29-A490-771AD96B5D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53C16D7E-B7A8-4F29-A490-771AD96B5D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F1B98C7-0411-4FA6-B58E-24404400F14A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1B98C7-0411-4FA6-B58E-24404400F14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3F2086E5-36B2-460D-A197-F30AA0CE68B9} = {86CF2110-844E-4BBC-B4B7-14815B590593}
-		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898} = {EE4E76C9-8A26-42C6-AAEC-9C72BCBC9F08}
 		{A01560A6-9D95-4ABC-9488-3613D7AC561F} = {86CF2110-844E-4BBC-B4B7-14815B590593}
 		{53C16D7E-B7A8-4F29-A490-771AD96B5D3F} = {86CF2110-844E-4BBC-B4B7-14815B590593}
+		{C05FB1D6-B29A-4ABE-88D7-7B5095B6D898} = {EE4E76C9-8A26-42C6-AAEC-9C72BCBC9F08}
+		{7F1B98C7-0411-4FA6-B58E-24404400F14A} = {EE4E76C9-8A26-42C6-AAEC-9C72BCBC9F08}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8308F899-F5F1-422E-9DEC-D23720A54793}

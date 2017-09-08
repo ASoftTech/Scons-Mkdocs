@@ -4,12 +4,7 @@ from SCons.Environment import Environment
 
 import sys, os
 
-# TODO remove once we can install via pip
-oldsyspath = sys.path
-dir_path = Dir('.').srcnode().abspath
-dir_path = os.path.join(dir_path, '../../')
-dir_path = os.path.abspath(dir_path)
-sys.path.append(dir_path)
+# Set PYTHONPATH before using if running without scons_tools_grbd installed via pip
 
 def main():
     # Setup environment
@@ -37,7 +32,9 @@ def main():
         Default(tgt)
 
     elif cmd == 'clean':
-        clean(env)
+        tgt = env.MkdocsBuild()
+        Default(tgt)
+        SetOption('clean', True)
 
     # Alternative Formats
 
@@ -50,29 +47,16 @@ def main():
         Default(tgt)
 
 
-
-
-    elif cmd == 'test1':
-        tgt = env.Dll2Lib('D:\\Temp\\19\\test1.lib', 'D:\\Temp\\19\\CoreUIComponents.dll')
-        Default(tgt)
-
-
-
-
-
+    # TODO
+    elif cmd == 'doxygen':
+        print ("TODO doxygen_templates")
 
     # TODO
-
-
     elif cmd == 'pdf':
         manual_clean(env)
         markdown_target = env.MkdocsCombiner()
         pd_target = env.Pandoc('docs/export/site.pdf', markdown_target)
         Default(pd_target)
-
-
-    elif cmd == 'doxygen':
-        print ("TODO doxygen_templates")
 
     else:
         print_useage(env)
@@ -91,17 +75,9 @@ def print_useage(env):
     print ("  mkcombine     to build the documentation as a combined markdown file")
 
     # TODO
-    print ("  pdf           to build the documentation as a pdf")
     print ("  doxygen       to build Doxygen related files to be inserted into the docs")
+    print ("  pdf           to build the documentation as a pdf")
 
-
-
-
-# Clean using the SCons build system
-def clean(env):
-    tgt = env.MkdocsBuild()
-    Default(tgt)
-    SetOption('clean', True)
 
 
 ## Manual Clean of Build directory without using scons
@@ -117,11 +93,9 @@ def manual_clean(env):
 
 def setup_opts(env):
     """Optionally change the default options"""
-    env.Replace(Mkdocs_Theme = 'cyborg')
-    env.Replace(Mkdocs_CleanBuild = True)
-
-    env.Replace(Mkdocs = 'mkdocs')
-
+    #env.Replace(Mkdocs_Theme = 'cyborg')
+    #env.Replace(Mkdocs_CleanBuild = True)
+    #env.Replace(Mkdocs = 'mkdocs')
     #env.Replace(Mkdocs_WorkingDir = env.Dir('.'))
     #env.Replace(Mkdocs_ServeUrl = '127.0.0.1:8001')
     #env.Replace(Mkdocs_Strict = True)

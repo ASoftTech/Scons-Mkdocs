@@ -2,19 +2,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>a01560a6-9d95-4abc-9488-3613d7ac561f</ProjectGuid>
+    <ProjectGuid>7f1b98c7-0411-4fa6-b58e-24404400f14a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>..\..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\..\;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
-    <WorkingDirectory>..\..\..\docs\Mkdocs</WorkingDirectory>
+    <SearchPath>..\..\..\;..\..\..\docs\Doxygen;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
+    <WorkingDirectory>..\..\..\docs\Doxygen</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>devel</Name>
-    <RootNamespace>devel</RootNamespace>
+    <Name>Doxygen</Name>
+    <RootNamespace>Doxygen</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <CommandLineArguments>build</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <Environment>PYTHONPATH=..\..\..\</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,7 +26,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SConstruct.py" />
+    <Compile Include="..\..\..\docs\Doxygen\build.py">
+      <Link>build.py</Link>
+    </Compile>
+    <Compile Include="..\..\..\docs\Doxygen\SConstruct.py">
+      <Link>SConstruct.py</Link>
+    </Compile>
+    <Compile Include="..\..\..\docs\Doxygen\x_build.py">
+      <Link>x_build.py</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\docs\Doxygen\Doxyfile">
+      <Link>Doxyfile</Link>
+    </Content>
+    <Content Include="..\..\..\docs\Doxygen\SConstruct">
+      <Link>SConstruct</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\..\..\tools\virtualenv_py3\">
@@ -37,9 +54,6 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SConstruct" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

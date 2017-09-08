@@ -3,7 +3,7 @@ import TestSCons
 
 test = TestSCons.TestSCons()
 
-test.dir_fixture('images/MkdocsBuild')
+test.dir_fixture('images/MkdocsJsonBuild')
 test.run(arguments = '.', stdout = None, stderr = None)
 
 stdout_filtered = []
@@ -16,12 +16,12 @@ expected_stdout = """\
 scons: Reading SConscript files ...
 scons: done reading SConscript files.
 scons: Building targets ...
-__MkdocsBuild_func(["mkdocs", "site2\mkdocs\search_index.json"], ["mkdocs.yml", "docs\index.md"])
-Building MkDocs Documentation:
-mkdocs build --config-file=mkdocs.yml --theme=cyborg --theme-dir=theme --site-dir=site2
-__MkdocsBuild_func(["site\mkdocs\search_index.json"], ["mkdocs.yml", "docs\index.md"])
-Building MkDocs Documentation:
-mkdocs build --config-file=mkdocs.yml --clean --strict --theme=cyborg --theme-dir=theme --site-dir=site --quiet --verbose
+__MkdocsJsonBuild_func(["mkdocs", "site2\mkdocs\search_index.json"], ["mkdocs.yml", "docs\index.md"])
+Building MkDocs Documentation as Json:
+mkdocs json --config-file=mkdocs.yml --site-dir=site2
+__MkdocsJsonBuild_func(["site\mkdocs\search_index.json"], ["mkdocs.yml", "docs\index.md"])
+Building MkDocs Documentation as Json:
+mkdocs json --config-file=mkdocs.yml --clean --strict --site-dir=site --quiet --verbose
 scons: done building targets.
 """
 expected_stdout = os.linesep.join(expected_stdout.splitlines())

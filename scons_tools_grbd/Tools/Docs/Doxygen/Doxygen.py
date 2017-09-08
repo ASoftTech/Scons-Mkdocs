@@ -24,10 +24,69 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import os
-import os.path
+# The original version was tested with doxygen 1.4.6
+
+import os, sys, os.path as path
+import SCons.Script
+from SCons.Environment import Environment
+from SCons.Script import Builder
 import glob
 from fnmatch import fnmatch
+
+
+def exists(env):
+    """Check if we're okay to load this builder"""
+    return DoxygenCommon.detect(env)
+
+# TODO
+
+
+
+def generate(env):
+    """Called when the tool is loaded into the environment at startup of script"""
+    assert(exists(env))
+    DoxygenCommon.setup_opts(env)
+
+    doxyfile_scanner = env.Scanner(
+        DoxySourceScan,
+        "DoxySourceScan",
+        scan_check=DoxySourceScanCheck,
+    )
+
+    bld = Builder(action = __Doxygen_func, emitter = DoxyEmitter,
+        target_factory=env.fs.Entry, single_source=True,
+        source_scanner=doxyfile_scanner)
+    env.Append(BUILDERS = {'Doxygen' : bld})
+
+
+def __Doxygen_func(target, source, env):
+    """Actual builder that does the work after the Sconscript file is parsed"""
+    cmdopts = ['$Doxygen']
+    cmdopts.append(str(source[0]))
+    cmdopts = cmdopts + env['Doxygen_ExtraArgs']
+
+    print('Building Doxygen html:')
+    env.Execute(env.Action([cmdopts], chdir=env['Doxygen_WorkingDir']))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Currently supported output formats and their default
 # values and output locations.
@@ -100,8 +159,8 @@ def DoxyfileParse(file_contents, conf_dir, data=None):
                 # special case for @INCLUDE key: read the referenced
                 # file as a doxyfile too.
                 nextfile = token
-                if not os.path.isabs(nextfile):
-                    nextfile = os.path.join(conf_dir, nextfile)
+                if not path.isabs(nextfile):
+                    nextfile = path.join(conf_dir, nextfile)
                 if nextfile in data[key]:
                     raise Exception("recursive @INCLUDE in Doxygen config: " + nextfile)
                 data[key].append(nextfile)
@@ -156,7 +215,7 @@ def DoxySourceFiles(node, env):
     # configuration file is in the same directory as node; this means
     # that relative pathnames in node must be adjusted before they can
     # go onto the sources list
-    conf_dir = os.path.dirname(str(node))
+    conf_dir = path.dirname(str(node))
 
     data = DoxyfileParse(node.get_contents(), conf_dir)
 
@@ -171,15 +230,15 @@ def DoxySourceFiles(node, env):
     input = data.get("INPUT")
     if input:
         for node in data.get("INPUT", []):
-            if not os.path.isabs(node):
-                node = os.path.join(conf_dir, node)
-            if os.path.isfile(node):
+            if not path.isabs(node):
+                node = path.join(conf_dir, node)
+            if path.isfile(node):
                 sources.append(node)
-            elif os.path.isdir(node):
+            elif path.isdir(node):
                 if recursive:
                     for root, dirs, files in os.walk(node):
                         for f in files:
-                            filename = os.path.join(root, f)
+                            filename = path.join(root, f)
 
                             pattern_check = reduce(lambda x, y: x or bool(fnmatch(filename, y)), file_patterns, False)
                             exclude_check = reduce(lambda x, y: x and fnmatch(filename, y), exclude_patterns, True)
@@ -194,7 +253,7 @@ def DoxySourceFiles(node, env):
         if recursive:
             for root, dirs, files in os.walk('.'):
                 for f in files:
-                    filename = os.path.join(root, f)
+                    filename = path.join(root, f)
 
                     pattern_check = reduce(lambda x, y: x or bool(fnmatch(filename, y)), file_patterns, False)
                     exclude_check = reduce(lambda x, y: x and fnmatch(filename, y), exclude_patterns, True)
@@ -212,8 +271,8 @@ def DoxySourceFiles(node, env):
     # Add tagfiles to the list of source files:
     for node in data.get("TAGFILES", []):
         file = node.split("=")[0]
-        if not os.path.isabs(file):
-            file = os.path.join(conf_dir, file)
+        if not path.isabs(file):
+            file = path.join(conf_dir, file)
         sources.append(file)
 
     # Add additional files to the list of source files:
@@ -222,9 +281,9 @@ def DoxySourceFiles(node, env):
             if data.get('GENERATE_' + f, output_formats[f][0]) == "YES":
                 file = data.get(option, "")
                 if file != "":
-                    if not os.path.isabs(file):
-                        file = os.path.join(conf_dir, file)
-                    if os.path.isfile(file):
+                    if not path.isabs(file):
+                        file = path.join(conf_dir, file)
+                    if path.isfile(file):
                         sources.append(file)
                 break
 
@@ -247,19 +306,19 @@ def DoxySourceScan(node, env, path):
 
 def DoxySourceScanCheck(node, env):
     """Check if we should scan this file"""
-    return os.path.isfile(node.path)
+    return path.isfile(node.path)
 
 
 def DoxyEmitter(target, source, env):
     """Doxygen Doxyfile emitter"""
     doxy_fpath = str(source[0])
-    conf_dir = os.path.dirname(doxy_fpath)
+    conf_dir = path.dirname(doxy_fpath)
     data = DoxyfileParse(source[0].get_contents(), conf_dir)
 
     targets = []
     out_dir = data.get("OUTPUT_DIRECTORY", ".")
-    if not os.path.isabs(out_dir):
-        out_dir = os.path.join(conf_dir, out_dir)
+    if not path.isabs(out_dir):
+        out_dir = path.join(conf_dir, out_dir)
 
     # add our output locations
     for (k, v) in output_formats.items():
@@ -279,9 +338,9 @@ def DoxyEmitter(target, source, env):
                     # No, so set back to default
                     manext = "3"
 
-                od = env.Dir(os.path.join(out_dir, data.get(k + "_OUTPUT", v[1]), "man" + manext))
+                od = env.Dir(path.join(out_dir, data.get(k + "_OUTPUT", v[1]), "man" + manext))
             else:
-                od = env.Dir(os.path.join(out_dir, data.get(k + "_OUTPUT", v[1])))
+                od = env.Dir(path.join(out_dir, data.get(k + "_OUTPUT", v[1])))
             # don't clobber target folders
             env.Precious(od)
             # set up cleaning stuff
@@ -294,7 +353,7 @@ def DoxyEmitter(target, source, env):
                     fname = v[2] + data.get(v[4])
                 else:
                     fname = v[2] + v[3]
-                of = env.File(os.path.join(out_dir, data.get(k + "_OUTPUT", v[1]), fname))
+                of = env.File(path.join(out_dir, data.get(k + "_OUTPUT", v[1]), fname))
                 targets.append(of)
                 # don't clean single files, we remove the complete output folders (see above)
                 env.NoClean(of)
@@ -305,8 +364,8 @@ def DoxyEmitter(target, source, env):
                 # a second time... :(
                 filepaths = DoxySourceFiles(source[0], env)
                 for f in filepaths:
-                    if os.path.isfile(f) and f != doxy_fpath:
-                        of = env.File(os.path.join(out_dir,
+                    if path.isfile(f) and f != doxy_fpath:
+                        of = env.File(path.join(out_dir,
                                                    data.get(k + "_OUTPUT", v[1]),
                                                    "man" + manext,
                                                    f + "." + manext))
@@ -317,44 +376,13 @@ def DoxyEmitter(target, source, env):
     # add the tag file if neccessary:
     tagfile = data.get("GENERATE_TAGFILE", "")
     if tagfile != "":
-        if not os.path.isabs(tagfile):
-            tagfile = os.path.join(conf_dir, tagfile)
+        if not path.isabs(tagfile):
+            tagfile = path.join(conf_dir, tagfile)
         targets.append(env.File(tagfile))
 
     return (targets, source)
 
 
-def generate(env):
-    """
-    Add builders and construction variables for the
-    Doxygen tool.  This is currently for Doxygen 1.4.6.
-    """
-    doxyfile_scanner = env.Scanner(
-        DoxySourceScan,
-        "DoxySourceScan",
-        scan_check=DoxySourceScanCheck,
-    )
-
-    import SCons.Builder
-    doxyfile_builder = SCons.Builder.Builder(
-        action="cd ${SOURCE.dir}  &&  ${DOXYGEN} ${SOURCE.file}",
-        emitter=DoxyEmitter,
-        target_factory=env.fs.Entry,
-        single_source=True,
-        source_scanner=doxyfile_scanner,
-    )
-
-    env.Append(BUILDERS={
-        'Doxygen': doxyfile_builder,
-    })
-
-    env.AppendUnique(
-        DOXYGEN='doxygen',
-    )
 
 
-def exists(env):
-    """
-    Make sure doxygen exists.
-    """
-    return env.Detect("doxygen")
+

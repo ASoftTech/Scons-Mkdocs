@@ -1,0 +1,6 @@
+import os, sys
+
+# First test
+env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+tgt = env.MkdocsCombiner()
+Default(tgt)
