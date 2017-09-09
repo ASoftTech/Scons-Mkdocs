@@ -9,8 +9,8 @@ import sys, os
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Doxygen', 'Docs.Mkdocs'],
-                     toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+    env = Environment(ENV = os.environ, tools = ['Docs.Doxygen.DoxygenDefaultTemplate', 'Docs.Mkdocs'],
+                    toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
     # Use the first parameter as the mode to run as
@@ -33,8 +33,8 @@ def main():
         pass
 
     elif cmd == 'template_def':
-        #tgt = env.DoxygenDefaultTemplate('Doxyfile')
-        #Default(tgt)
+        tgt = env.DoxygenDefaultTemplate('test1', 'Doxyfile')
+        Default(tgt)
         # TODO
         pass
 

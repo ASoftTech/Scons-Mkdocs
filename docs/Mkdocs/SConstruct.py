@@ -9,7 +9,8 @@ import sys, os
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'], toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
+    env = Environment(ENV = os.environ, tools = ['Docs.Mkdocs'],
+                    toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
     # Use the first parameter as the mode to run as

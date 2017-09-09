@@ -21,7 +21,18 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     DoxygenCommon.setup_opts(env)
-    bld = Builder(action = __DoxygenDefaultTemplate_func, emitter = DoxygenCommon.Doxygen_emitter)
+
+    doxyfile_scanner = env.Scanner(
+        DoxygenCommon.DoxySourceScan,
+        "DoxySourceScan",
+        scan_check=DoxygenCommon.DoxySourceScanCheck,
+    )
+
+    #bld = Builder(action = __DoxygenDefaultTemplate_func, emitter = DoxygenCommon.DoxyEmitter,
+    #    target_factory=env.fs.Entry, single_source=True,
+    #    source_scanner=doxyfile_scanner)
+    bld = Builder(action = __DoxygenDefaultTemplate_func, emitter = DoxygenCommon.DoxyEmitter,
+        target_factory=env.fs.Entry, single_source=True)
     env.Append(BUILDERS = {'DoxygenDefaultTemplate' : bld})
 
 

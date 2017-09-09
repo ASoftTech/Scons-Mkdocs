@@ -13,7 +13,7 @@
     <IsWindowsApplication>False</IsWindowsApplication>
     <InterpreterId>MSBuild|virtualenv_py3|$(MSBuildProjectFullPath)</InterpreterId>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>build</CommandLineArguments>
+    <CommandLineArguments>template_def</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PYTHONPATH=..\..\..\</Environment>
   </PropertyGroup>
