@@ -31,6 +31,9 @@ import SCons.Script
 from SCons.Environment import Environment
 from SCons.Script import Builder
 
+# TODO fix relative imports when importing a single namespaced tool
+from scons_tools_grbd.Tools.Docs.Doxygen import DoxygenCommon
+
 
 def exists(env):
     """Check if we're okay to load this builder"""
@@ -49,7 +52,7 @@ def generate(env):
     )
 
     bld = Builder(action = __Doxygen_func, emitter = DoxygenCommon.DoxyEmitter,
-        target_factory=env.fs.Entry, single_source=True,
+        target_factory=env.fs.Entry,
         source_scanner=doxyfile_scanner)
     env.Append(BUILDERS = {'Doxygen' : bld})
 

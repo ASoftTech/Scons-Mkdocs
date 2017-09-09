@@ -28,11 +28,9 @@ def generate(env):
         scan_check=DoxygenCommon.DoxySourceScanCheck,
     )
 
-    #bld = Builder(action = __DoxygenDefaultTemplate_func, emitter = DoxygenCommon.DoxyEmitter,
-    #    target_factory=env.fs.Entry, single_source=True,
-    #    source_scanner=doxyfile_scanner)
     bld = Builder(action = __DoxygenDefaultTemplate_func, emitter = DoxygenCommon.DoxyEmitter,
-        target_factory=env.fs.Entry, single_source=True)
+        target_factory=env.fs.Entry, single_source=True,
+        source_scanner=doxyfile_scanner)
     env.Append(BUILDERS = {'DoxygenDefaultTemplate' : bld})
 
 

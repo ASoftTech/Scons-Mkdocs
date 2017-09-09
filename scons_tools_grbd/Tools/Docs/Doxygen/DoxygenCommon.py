@@ -9,6 +9,7 @@ from SCons.Environment import Environment
 from SCons.Script import File, Dir
 import glob
 from fnmatch import fnmatch
+from functools import reduce
 
 # Currently supported output formats and their default
 # values and output locations.

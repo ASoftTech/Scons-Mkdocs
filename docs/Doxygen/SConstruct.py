@@ -9,7 +9,7 @@ import sys, os
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
-    env = Environment(ENV = os.environ, tools = ['Docs.Doxygen.DoxygenDefaultTemplate', 'Docs.Mkdocs'],
+    env = Environment(ENV = os.environ, tools = ['Docs.Doxygen', 'Docs.Mkdocs'],
                     toolpath = [PyPackageDir('scons_tools_grbd.Tools')])
     setup_opts(env)
 
