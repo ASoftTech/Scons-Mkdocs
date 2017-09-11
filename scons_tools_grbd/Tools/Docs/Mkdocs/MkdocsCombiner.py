@@ -22,7 +22,15 @@ def generate(env):
     """Called when the tool is loaded into the environment at startup of script"""
     assert(exists(env))
     MkdocsCommon.setup_opts_combiner(env)
-    bld = Builder(action = __MkdocsCombiner_func, emitter = MkdocsCommon.MkdocsCombiner_emitter)
+    mkdocs_scanner = env.Scanner(
+        MkdocsCommon.MkdocsScanner,
+        'MkdocsScanner',
+    )
+    bld = Builder(
+        action = __MkdocsCombiner_func,
+        emitter = MkdocsCommon.MkdocsCombiner_emitter,
+        source_scanner = mkdocs_scanner,
+    )
     env.Append(BUILDERS = {'MkdocsCombiner' : bld})
 
 

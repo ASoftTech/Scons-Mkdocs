@@ -5,7 +5,7 @@
     <ProjectGuid>a01560a6-9d95-4abc-9488-3613d7ac561f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>..\..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\..\;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
+    <SearchPath>..\..\..\;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170821;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
     <WorkingDirectory>..\..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>devel</Name>

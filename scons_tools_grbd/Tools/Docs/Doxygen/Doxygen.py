@@ -52,7 +52,7 @@ def generate(env):
     )
 
     bld = Builder(action = __Doxygen_func, emitter = DoxygenCommon.DoxyEmitter,
-        target_factory=env.fs.Entry,
+        target_factory=env.fs.Entry, single_source=True,
         source_scanner=doxyfile_scanner)
     env.Append(BUILDERS = {'Doxygen' : bld})
 

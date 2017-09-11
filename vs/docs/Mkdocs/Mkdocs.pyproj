@@ -6,7 +6,7 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>..\..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\..\;..\..\..\docs\Mkdocs;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
+    <SearchPath>..\..\..\;..\..\..\docs\Mkdocs;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170821;..\..\..\tools\virtualenv_py3\Scripts;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170821</SearchPath>
     <WorkingDirectory>..\..\..\docs\Mkdocs</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>docs</Name>
@@ -31,6 +31,15 @@
     <InterpreterReference Include="Global|PythonCore|3.5" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\..\..\tools\virtualenv_py2\">
+      <Id>virtualenv_py2</Id>
+      <Version>2.7</Version>
+      <Description>virtualenv_py2 (Python 2.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="..\..\..\tools\virtualenv_py3\">
       <Id>virtualenv_py3</Id>
       <Version>3.5</Version>

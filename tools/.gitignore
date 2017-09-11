@@ -1,3 +1,5 @@
 # Ignore python virtual environment directory
 virtualenv_py3/
-scons-test
+virtualenv_py2/
+scons-test-py2/
+scons-test-py3/

@@ -120,7 +120,7 @@ def setup_opts_combiner(env):
         )
 
 
-def MkdocsScanner(node, env, path, arg):
+def MkdocsScanner(node, env, path, arg = None):
     """Dependency scanner for listing all files within the mkdocs source directory (typically docs)
     We exclude the doxygen dir since it has quite a lot of content and requires a clean build anyway
     Args:
@@ -131,7 +131,10 @@ def MkdocsScanner(node, env, path, arg):
     Returns:
         A list of files.
     """
-    searchpath = env.subst(node.abspath)
+    # Read mkdocs config
+    yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(node, env)
+    # Look at the docs source directory
+    searchpath = env.subst(docsdirnode.abspath)
     doxygen_path = os.path.join(searchpath, 'doxygen')
     depends = []
     for d, unused_s, files in os.walk(searchpath, topdown=True):
@@ -151,8 +154,6 @@ def Mkdocs_emitter(target, source, env):
         cfgfile = source[0]
     # Read mkdocs config
     yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
-    # Add in the contents of the docs source directory
-    source = source + MkdocsScanner(docsdirnode, env, None, None)
     # We need at least one target that's a file for the rebuild if source changes logic to work
     filenode = File(path.join(str(sitedirnode), 'mkdocs/search_index.json'))
     target.append(filenode)
@@ -169,11 +170,9 @@ def MkdocsCombiner_emitter(target, source, env):
         cfgfile = source[0]
     # Read mkdocs config
     yamlcfg, sitedirnode, docsdirnode = Mkdocs_Readconfig(cfgfile, env)
-    # Add in the contents of the docs directory
-    source = source + MkdocsScanner(docsdirnode, env, None, None)
     # Default target
     if not target:
-        target = File('site/mkdocs.pd')
+        target = File(path.join(str(sitedirnode), 'export/mkdocs.pd'))
     return target, source
 
 

@@ -5,7 +5,7 @@
     <ProjectGuid>7f1b98c7-0411-4fa6-b58e-24404400f14a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>..\..\..\tools\virtualenv_py3\Scripts\scons.py</StartupFile>
-    <SearchPath>..\..\..\;..\..\..\docs\Doxygen;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170614;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
+    <SearchPath>..\..\..\;..\..\..\docs\Doxygen;..\..\..\tools\virtualenv_py3\Lib\site-packages\scons-3.0.0.alpha.20170821;..\..\..\tools\virtualenv_py3\Scripts</SearchPath>
     <WorkingDirectory>..\..\..\docs\Doxygen</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Doxygen</Name>

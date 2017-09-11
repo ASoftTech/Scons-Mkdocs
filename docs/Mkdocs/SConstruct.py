@@ -6,6 +6,12 @@ import sys, os
 
 # Set PYTHONPATH before using if running without scons_tools_grbd installed via pip
 
+import SCons.compat
+import pickle
+SCons.compat.PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
+
+
+
 def main():
     # Setup environment
     EnsureSConsVersion(3,0,0)
