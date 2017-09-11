@@ -52,7 +52,7 @@ def __MkdocsPublish_func(target, source, env):
         cmdopts.append('--dirty')
     if not env['Mkdocs_CommitMsg']:
         raise Exception('No commit message specified')
-    cmdopts.append('--message=$Mkdocs_CommitMsg')
+    cmdopts.append('--message="$Mkdocs_CommitMsg"')
     if env['Mkdocs_RemoteBranch']:
         cmdopts.append('--remote-branch=$Mkdocs_RemoteBranch')
     if env['Mkdocs_RemoteName']:

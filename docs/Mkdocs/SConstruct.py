@@ -27,6 +27,9 @@ def main():
         Exit(1)
 
     if cmd == 'serve':
+        # Doxygen directory can get quite big, so iets remove it for serve mode
+        doxydir = os.path.abspath('docs/doxygen')
+        Execute(Delete(doxydir))
         tgt = env.MkdocsServer()
         Default(tgt)
 
@@ -35,7 +38,7 @@ def main():
         Default(tgt)
 
     elif cmd == 'publish':
-        tgt = env.MkdocsPublish("Example commit message")
+        tgt = env.MkdocsPublish("Site update")
         Default(tgt)
 
     elif cmd == 'clean':

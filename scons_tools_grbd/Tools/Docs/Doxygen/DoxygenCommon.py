@@ -71,9 +71,16 @@ def DoxySourceScanCheck(node, env):
 
 def DoxyEmitter(target, source, env):
     """Doxygen Doxyfile emitter"""
-    doxy_fpath = str(source[0])
+    # Choose Doxyfile as source file if not specified
+    if not source:
+        doxyfilenode = File('Doxyfile')
+        source.append(doxyfilenode)
+    else:
+        doxyfilenode = source[0]
+
+    doxy_fpath = str(doxyfilenode)
     conf_dir = path.dirname(doxy_fpath)
-    data = DoxyfileParse(source[0].get_contents(), conf_dir)
+    data = DoxyfileParse(doxyfilenode.get_contents(), conf_dir)
 
     targets = []
     out_dir = data.get("OUTPUT_DIRECTORY", ".")
@@ -122,7 +129,7 @@ def DoxyEmitter(target, source, env):
                 # We have to add a target file docs/man/man3/foo.h.3
                 # for each input file foo.h, so we scan the config file
                 # a second time... :(
-                filepaths = DoxySourceFiles(source[0], env)
+                filepaths = DoxySourceFiles(doxyfilenode, env)
                 for f in filepaths:
                     if path.isfile(f) and f != doxy_fpath:
                         of = env.File(path.join(out_dir,

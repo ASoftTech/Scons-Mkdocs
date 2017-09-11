@@ -2,9 +2,11 @@
 import SCons.Script
 from SCons.Environment import Environment
 
-import sys, os
+import sys, os, os.path as path
 
 # Set PYTHONPATH before using if running without scons_tools_grbd installed via pip
+
+MkdocsDir = '../Mkdocs'
 
 def main():
     # Setup environment
@@ -21,28 +23,29 @@ def main():
         Exit(1)
 
     if cmd == 'build':
-        tgt = env.Doxygen('Doxyfile')
-        Default(tgt)
-        # TODO Copy theme/search.js   to Mkdocs/docs/doxygen/search/search.js
-        # TODO Copy theme/doxygen.css to Mkdocs/docs/doxygen/doxygen.css
-        # print ("Build finished. The HTML pages are in " + self.BUILDDIR)
-        pass
+        doxytgt = env.Doxygen()
+        cmd1 = Command(path.join(MkdocsDir, 'docs/doxygen/search/search.js'), 'theme/search.js', Copy('$TARGET', '$SOURCES'))
+        cmd2 = Command(path.join(MkdocsDir, 'docs/doxygen/doxygen.css'), 'theme/doxygen.css', Copy('$TARGET', '$SOURCES'))
+        Depends(cmd1, doxytgt)
+        Depends(cmd2, doxytgt)
+        Default(cmd1, cmd2, doxytgt)
 
     elif cmd == 'template_mkdocs':
         # TODO
+        # 1. temp build of Mkdocs
+        # 2. template_mkdocs script to regenerate headers
         pass
 
     elif cmd == 'template_def':
+        # TODO
         tgt = env.DoxygenDefaultTemplate('test1', 'Doxyfile')
         Default(tgt)
-        # TODO
-        pass
 
     elif cmd == 'clean':
-        #tgt = env.MkdocsBuild()
-        #Default(tgt)
-        #SetOption('clean', True)
-        pass
+        # TODO
+        doxytgt = env.Doxygen()
+        Default(doxytgt)
+        SetOption('clean', True)
 
 
     # 1. clean build of Mkdocs
